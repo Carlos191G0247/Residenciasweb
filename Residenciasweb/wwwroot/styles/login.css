@@ -8,16 +8,17 @@
 }
 
 div {
-    text-align: center;
-    width: 40%;
     
-
+    width: 40%;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
 }
+    div form {
+        max-width: 400px;
+    }
 
     div h2 {
         margin-bottom: 20px;
@@ -44,31 +45,36 @@ div {
         margin: 10px 0px;
     }
     /* Estilos del modal */
-    .modal {
-        width:100%;
-        height:100%;
-        background: rgba(0,0,0,.3);
-        position: fixed;
-        top: 0;
-        left: 0;
-        right:0;
-        bottom:0;
+.modal {
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0;
+    display: flex;
+    opacity:0;
+    pointer-events: none;
+}
 
-        padding: 0;
-        display: flex;
-        
-    }
+.modal--show{
+    opacity:1;
+    pointer-events:unset;
+}
 
-        div.modal form {
-            background: white;
-            width: 60%;
-            padding: 20px;
-            display: flex;
-            margin:  auto;
-            gap: 10px;
-            flex-wrap: wrap;
-
-        }
+.modal form {
+    max-width: 400px;
+    background: white;
+    width: 60%;
+    padding: 20px;
+    display: flex;
+    margin: auto;
+    gap: 10px;
+    flex-wrap: wrap;
+}
 
 
 
