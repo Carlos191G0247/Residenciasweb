@@ -8,16 +8,19 @@
 }
 
 div {
-    
+    max-width:400px; 
     width: 40%;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
+   
 }
     div form {
         max-width: 400px;
+        
+        margin:auto;
     }
 
     div h2 {
@@ -30,6 +33,7 @@ div {
         margin-bottom: 10px;
         width: 100%;
     }
+    
 
     div input {
         padding: 10px;
@@ -55,15 +59,12 @@ div {
     right: 0;
     bottom: 0;
     padding: 0;
-    display: flex;
-    opacity:0;
-    pointer-events: none;
+    display: none;
+ 
+ 
 }
 
-.modal--show{
-    opacity:1;
-    pointer-events:unset;
-}
+
 
 .modal form {
     max-width: 400px;

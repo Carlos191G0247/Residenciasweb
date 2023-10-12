@@ -5,14 +5,14 @@ var modalElement = document.querySelector(".modal");
 document.body.addEventListener("click", function (e) {
     if (e.target.tagName == "A" && e.target.textContent == "¿Olvidaste tu contraseña?") {
 
-        formRecuperar.style.display = "block";
-        formMensaje.style.display = "none";
-        modalElement.classList.add("modal--show");
+        formRecuperar.parentElement.style.display = "flex";
+        formMensaje.parentElement.style.display = "none";
+        
     }
     else if (e.target.tagName == "A" && e.target.textContent == "Registrarte") {
-        formMensaje.style.display = "block";
-        formRecuperar.style.display = "none";
-        modalElement.classList.add("modal--show");
+        formMensaje.parentElement.style.display = "flex";
+        formRecuperar.parentElement.style.display = "none";
+    
     } 
     
 });
