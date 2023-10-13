@@ -7,11 +7,20 @@ document.body.addEventListener("click", function (e) {
 
         formRecuperar.parentElement.style.display = "flex";
         formMensaje.parentElement.style.display = "none";
-        
+       
     }
-    else if (e.target.tagName == "A" && e.target.textContent == "Registrarte") {
+    else if (e.target.tagName == "INPUT" && e.target.value == "Cancelar") {
+        modalElement.style.display = "none";
+       
+    }
+    if (e.target.tagName == "INPUT") {
+
         formMensaje.parentElement.style.display = "flex";
-        formRecuperar.parentElement.style.display = "none";
+    }
+    
+
+    else if (e.target.tagName == "A" && e.target.textContent == "Registrarte") {
+        window.location.href = "/Registro/registroResidente";
     
     } 
     

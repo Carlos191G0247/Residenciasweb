@@ -10,7 +10,7 @@
     </title>
 </head>
 <body>
-    <div>
+    <div class="login">
         <h2>Iniciar Sesión</h2>
         <form>
             <label>Usuario:</label>
@@ -36,8 +36,8 @@
 
             <h1>Recuperar Contraseña</h1>
             <h3>Introduce tu correo institucional y tu numero de control</h3>
-            <input name="numControl" type="text" placeholder="Número de control" required pattern="\d{2}1[A-Z][EC0DM]\d{3}" />
-            <input name="correoInstituto" type="text" placeholder="Correo institucional" required />
+            <input name="numControl" type="text" placeholder="Número de control" @*required pattern="\d{2}1[A-Z][EC0DM]\d{3}" *@/>
+            <input name="correoInstituto" type="text" placeholder="Correo institucional" @*required*@ />
             <input type="button" value="Cancelar" />
             <input type="submit" value="Guardar" />
         </form>
