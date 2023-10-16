@@ -1,0 +1,29 @@
+﻿section {
+    width: 100%;
+    height: 100%;
+}
+
+section div {
+    display: flex;
+    justify-content: center;
+    width: 330px;
+    height: 100%;
+    background: gray;
+    
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding:0;
+    width:100%;
+}
+
+li {
+    margin:10px;
+    background-color: red;
+    flex:1;
+}
+

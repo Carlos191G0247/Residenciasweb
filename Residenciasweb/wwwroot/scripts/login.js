@@ -13,8 +13,8 @@ document.body.addEventListener("click", function (e) {
         modalElement.style.display = "none";
        
     }
-    if (e.target.tagName == "INPUT") {
-
+    if (e.target.tagName == "INPUT" && e.target.value == "Recuperar") {
+        formRecuperar.parentElement.style.display = "none";
         formMensaje.parentElement.style.display = "flex";
     }
     

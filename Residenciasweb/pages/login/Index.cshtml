@@ -39,24 +39,17 @@
             <input name="numControl" type="text" placeholder="Número de control" @*required pattern="\d{2}1[A-Z][EC0DM]\d{3}" *@/>
             <input name="correoInstituto" type="text" placeholder="Correo institucional" @*required*@ />
             <input type="button" value="Cancelar" />
-            <input type="submit" value="Guardar" />
+            <input type="button" value="Recuperar" />
         </form>
     </div>
     <div class="modal">
         <form class="formMensaje">
-            <label>Usuario:</label>
-            <input type="text">
+           <h2>Recuperar Contraseña</h2>
 
-            <label>Numero de Control:</label>
-            <input type="text">
+            <a>Te informamos que su preceso de recuperacion de contraseña a sido exitoso</a>
+            <strong @* style="text-transform:uppercase" *@>Se le enviara una nueva contraseña al correo agregado y esto tardara un lapso de 24 - 78 horas </strong>
 
-            <label>Contraseña:</label>
-            <input type="password">
-
-            <a>¿Olvidaste tu contraseña?</a><br />
-            <button type="submit">Iniciar Sesión</button><br />
-
-            <a>Registrarte</a>
+            <input type="submit" value="Finalizar" />
         </form>
     </div>
     <script src="~/scripts/login.js"></script>
