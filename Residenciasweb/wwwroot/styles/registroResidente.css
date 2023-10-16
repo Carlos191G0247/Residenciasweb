@@ -6,7 +6,7 @@
 section div {
     display: flex;
     justify-content: center;
-    width: 330px;
+    width: 25%;
     height: 100%;
     background: gray;
     
@@ -22,8 +22,13 @@ ul {
 }
 
 li {
-    margin:10px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin: 10px;
     background-color: red;
-    flex:1;
+    flex: 1;
 }
+
+
 
