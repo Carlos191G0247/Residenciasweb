@@ -1,4 +1,9 @@
-﻿body {
+﻿@font-face {
+    font-family: fuente;
+    src: url(../fonts/Roboto-ThinItalic.ttf);
+}
+
+body {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,6 +34,7 @@ header img{
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
+    
 }
     div form {
         max-width: 400px;
@@ -36,12 +42,17 @@ header img{
         margin:auto;
     }
 
-    div h2 {
-        margin-bottom: 20px;
-    }
+div h2 {
+    display:flex;
+    justify-content:center;
+    text-transform:uppercase;
+    font-family: fuente;
+    margin-bottom: 20px;
+}
 
     div label,
     div input {
+        font-family:fuente;
         display: block;
         margin-bottom: 10px;
         width: 100%;
@@ -51,16 +62,27 @@ header img{
     div input {
         padding: 10px;
         border: 1px solid #ccc;
+        display:flex;
+        justify-content:center;
     }
 
-    div button {
-        background-color: #007BFF;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-        margin: 10px 0px;
-    }
+div button {
+    display: flex;
+    justify-content: center;
+    background-color: #1B396A;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 10px auto;
+    font-weight:bold;
+}
+div a {
+    color:#1B396A;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
     /* Estilos del modal */
 .modal {
     width: 100%;
