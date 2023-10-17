@@ -38,12 +38,21 @@ li {
 }
 
 .derecha {
-    display: flex;
+    display: none;
     width: 100%;
     height: 100%;
     background: yellow;
     float:left;
+    
 }
+    .derecha#tarea1 {
+        display: flex;
+    }
+
+    .derecha form{
+        display:flex;
+        
+    }
 
 
 
