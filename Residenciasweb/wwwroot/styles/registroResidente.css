@@ -1,58 +1,188 @@
-﻿body {
-    margin:0;
-    padding:0;
-    overflow: auto;
-}
-
-section {
-    display:flex;
+﻿html, body {
     width: 100%;
     height: 100%;
-}
-
-    section div {
-        display: flex;
-        justify-content: center;
-        width: 25%;
-        height: 100%;
-        background: gray;
-        
-    }
-
-ul {
-    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    padding: 0;
-    width: 100%;
 }
 
-li {
+header {
+    background-color: #1B396A;
+    text-align: start;
+    height: 10%;
+}
+
+    header img {
+        height: 100%;
+    }
+
+.contenedor {
     display: flex;
-    justify-content: start;
-    align-items: center;
-    margin: 10px;
-    background-color: red;
     flex: 1;
 }
 
-.derecha {
-    display: none;
-    width: 100%;
+.list {
+    min-width:180px;
+    width: 20%;
+    border-right:solid;
+    border-color:#E4E4E4;
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    background: yellow;
-    float:left;
-    
+}
+    .list div {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+        .list div ul {
+            list-style-type: none;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+
+        }
+            .list div ul li {
+                width: 95%;
+                display: flex;
+                justify-content: start;
+                align-items: center;
+                margin: 5px;
+                background-color: #E4E4E4;
+                flex: 1;
+                flex-wrap: wrap;
+            }
+           
+            .list div ul content {
+                background: #E4E4E4;
+                width: 100%;
+                margin: 0px;
+                text-align: center;
+                
+            }
+
+
+.derecha {
+    display:none;
+    width: 80%;
+    margin:5px;
 }
     .derecha#tarea1 {
         display: flex;
     }
 
-    .derecha form{
-        display:flex;
-        
+    .derecha form {
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+        border: solid;
+        border-color: #E4E4E4;
     }
 
+        .derecha form h2 {
+            text-align: center;
+        }
 
+        .derecha form p, a {
+            margin: 10px 20px;
+            font-size: 20px;
+        }
+
+        .derecha form a {
+            color: #4B4B4B;
+            font-weight: bold;
+        }
+
+        .derecha form div {
+            display: flex;
+            width: 100%;
+            color: #4B4B4B;
+            font-weight: bold;
+        }
+
+
+.tareas {
+    background: #E7E7E7;
+    display: flex;
+    width: auto;
+    margin: auto;
+    align-items: center;
+    margin-left: 10px;
+    padding: 0;
+}
+    .tareas p {
+        padding: 5px;
+    }
+    .derecha img{
+        width:30px;
+        height:30px;
+        margin-left:10px;
+        
+    }
+.adjuntar {
+    display: flex;
+    width: auto;
+    margin: auto;
+    align-items: center;
+    margin-left: 10px;
+    padding: 0;
+}
+    .adjuntar b {
+
+        margin: 10px 20px;
+        font-size: 20px;
+        color: #1B396A;
+    }
+
+.enviar {
+    flex: 1;
+    display: flex;
+    margin: 10px -10px;
+    align-items: end;
+}
+    .enviar div{
+
+        display:flex;
+        justify-content:end;
+
+    }
+        .enviar div input {
+
+            width: auto;
+            height: auto;
+            padding: 5px;
+            font-size: 24px;
+            background: #DCD7D7;
+            color: #515050;
+            border:none;
+        }
+        .enviar div p {
+            color: #D4D4D4;
+        }
+
+
+
+
+
+
+
+            @media (max-width: 768px) {
+                p {
+                    font-size: 50px; /* Tamaño de fuente más pequeño para pantallas menores o iguales a 768px */
+                }
+            }
+            /* Estilos para pantallas aún más pequeñas */
+            @media (max-width: 480px) {
+                p {
+                    font-size: 80px; /* Tamaño de fuente aún más pequeño para pantallas menores o iguales a 480px */
+                }
+            }
 

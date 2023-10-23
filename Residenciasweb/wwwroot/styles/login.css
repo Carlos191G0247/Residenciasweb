@@ -111,6 +111,47 @@ div a {
     gap: 10px;
     flex-wrap: wrap;
 }
+    .modal h1 {
+        border-bottom: 1px solid #ccc;
+        width: 100%;
+        margin: 0;
+        padding-bottom: 10px;
+    }
+    .modal hr {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 1px;
+        background-color: #ccc;
+        border: none;
+    }
+    .modal div{
+        display:flex;
+        width:100%;
+        justify-content:end;
+    }
+        .modal div input {
+            width: 80px;
+            height: 100%;
+            margin: 5px;
+            
+            font-weight:bold;
+            
+        }
+.botonrecuperar {
+    width: 80px;
+    height: 100%;
+    margin: 5px;
+    color: white;
+    font-weight: bold;
+    background: #1B396A;
+}
+.botonfinalizar {
+    margin: 5px;
+    color: white;
+    font-weight: bold;
+    background: #1B396A;
+}
 
 
 
