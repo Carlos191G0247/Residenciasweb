@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="pages\admin\coordinadores\" />
+  </ItemGroup>
+
 </Project>
