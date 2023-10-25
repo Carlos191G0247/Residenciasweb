@@ -154,12 +154,16 @@ div a {
 }
 
 
-@media screen and (max-width: 768px)  {
+@media screen and (max-width: 1000px)  {
     .login {
+        max-width:none;
         width: 80%; 
         padding: 20px; 
     }
-
+    div form {
+        max-width: none;
+       
+    }
     div h2 {
         font-size: 30px; 
         margin-bottom: 20px; 

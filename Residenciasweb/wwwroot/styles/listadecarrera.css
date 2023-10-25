@@ -26,9 +26,12 @@ header {
     header img {
         height: 100%;
     }
+    .imgusuario{
+                height: 40%;
+                margin-right:20px;
+    }
 .contenedor{
     flex:1;
-    background:Red;
     height:auto;
     display:flex;
 }
@@ -39,7 +42,7 @@ header {
     justify-content: center;
     align-items: center;
 }
-    /*.boton input {
+    .boton input {
         border: none;
         width: 80%;
         height: 50px;
@@ -92,6 +95,6 @@ header {
         }
 @media screen and (max-width: 768px) {
     header nav p {
-        font-size: 20px;*/ /* Reduzca el tamaño de fuente para pantallas más pequeñas */
-    /*}
-}*/
+        font-size: 20px; /* Reduzca el tamaño de fuente para pantallas más pequeñas */
+    }
+}
