@@ -154,6 +154,21 @@ div a {
 }
 
 
+@media screen and (max-width: 768px)  {
+    .login {
+        width: 80%; 
+        padding: 20px; 
+    }
+
+    div h2 {
+        font-size: 30px; 
+        margin-bottom: 20px; 
+    }
+    
+}
+
+
+
 
 
 
