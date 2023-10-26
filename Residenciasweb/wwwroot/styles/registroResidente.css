@@ -18,16 +18,18 @@ header {
     }
 
 .contenedor {
-    height: 90%;
-    display: flex;
     flex: 1;
+    height: auto;
+    width:auto;
+    display: flex;
 }
 
 .list {
+    flex: 1;
     min-width:180px;
     width: 20%;
     border-right:solid;
-    border-color:#E4E4E4;
+    border-color:black;
     display: flex;
     flex-direction: column;
     height: 100%;

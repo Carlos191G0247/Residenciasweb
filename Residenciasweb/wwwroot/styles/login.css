@@ -156,9 +156,10 @@ div a {
 
 @media screen and (max-width: 1000px)  {
     .login {
-        max-width:none;
-        width: 80%; 
-        padding: 20px; 
+        max-width: none;
+        width: 80%;
+        height: 80%;
+        padding: 20px;
     }
     div form {
         max-width: none;
