@@ -3,68 +3,69 @@
     src: url(../fonts/Roboto-ThinItalic.ttf);
 }
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+html, body {
+    width: 100%;
+    height: 100%;
     margin: 0;
-    background-color: #f0f0f0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
 }
+
 header {
+    display: flex;
     background-color: #1B396A;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
     height: 10%;
-}
-header img{
-    display:flex;  
-    height:100%;
+    justify-content: space-between;
 }
 
-
- .login {
-    max-width: 400px;
-    width: 40%;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    
-}
-    div form {
-        max-width: 400px;
-        
-        margin:auto;
+    header img {
+        height: 100%;
     }
 
+.login {
+    flex: 1;
+    height: auto;
+    display: flex;
+    background: #f0f0f0;
+}
+
+div form {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40%;
+    height: auto;
+    background: #ffffff;
+    margin: auto;
+}
+
 div h2 {
-    display:flex;
-    justify-content:center;
-    text-transform:uppercase;
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
     font-family: fuente;
     margin-bottom: 20px;
 }
 
-    div label,
-    div input {
-        font-family:fuente;
-        display: block;
-        margin-bottom: 10px;
-        width: 100%;
-    }
-    
+div label,
+div input {
+    font-family: fuente;
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
 
-    div input {
-        padding: 10px;
-        border: 1px solid #ccc;
-        display:flex;
-        justify-content:center;
-    }
+}
+
+
+div input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+}
 
 div button {
     display: flex;
@@ -75,16 +76,18 @@ div button {
     padding: 10px 20px;
     cursor: pointer;
     margin: 10px auto;
-    font-weight:bold;
+    font-weight: bold;
 }
+
 div a {
-    color:#1B396A;
+    color: #1B396A;
     cursor: pointer;
     display: flex;
     justify-content: center;
 }
-    /* Estilos del modal */
+
 .modal {
+
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,.3);
@@ -95,8 +98,6 @@ div a {
     bottom: 0;
     padding: 0;
     display: none;
- 
- 
 }
 
 
@@ -111,33 +112,36 @@ div a {
     gap: 10px;
     flex-wrap: wrap;
 }
-    .modal h1 {
-        border-bottom: 1px solid #ccc;
-        width: 100%;
-        margin: 0;
-        padding-bottom: 10px;
+
+.modal h1 {
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.modal hr {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    border: none;
+}
+
+.modal div {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+}
+
+    .modal div input {
+        width: 80px;
+        height: 100%;
+        margin: 5px;
+        font-weight: bold;
     }
-    .modal hr {
-        padding: 0;
-        margin: 0;
-        width: 100%;
-        height: 1px;
-        background-color: #ccc;
-        border: none;
-    }
-    .modal div{
-        display:flex;
-        width:100%;
-        justify-content:end;
-    }
-        .modal div input {
-            width: 80px;
-            height: 100%;
-            margin: 5px;
-            
-            font-weight:bold;
-            
-        }
+
 .botonrecuperar {
     width: 80px;
     height: 100%;
@@ -146,6 +150,7 @@ div a {
     font-weight: bold;
     background: #1B396A;
 }
+
 .botonfinalizar {
     margin: 5px;
     color: white;
@@ -154,26 +159,53 @@ div a {
 }
 
 
-@media screen and (max-width: 1000px)  {
-    .login {
+@media screen and (max-width: 1000px) {
+
+
+    div form {
+        width: 90%;
+    }
+
+    div input {
+       
+        height: 80px;
+    }
+    .modal form {
         max-width: none;
         width: 80%;
-        height: 80%;
-        padding: 20px;
-    }
-    div form {
-        max-width: none;
-       
+        flex-wrap: wrap;
     }
     div h2 {
-        font-size: 30px; 
-        margin-bottom: 20px; 
+        font-size:50px;
+    }
+    div label,
+    div input {
+        font-size: 40px;
+    }
+
+
+    div button {
+        width: 40%;
+        height: 60px;
+        align-items: center;
+        font-size: 35px;
+    }
+
+    div a {
+        font-size: 35px;
+    }
+    .modal h3 {
+        font-size: 25px;
+    }
+
+    .modal div input {
+        
+        width: auto;
+        height: 100%;
+        
+    }
+    .modal strong {
+        font-size: 35px;
     }
     
 }
-
-
-
-
-
-
