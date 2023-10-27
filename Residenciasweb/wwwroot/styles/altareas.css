@@ -1,0 +1,147 @@
+﻿@font-face {
+    font-family: fuente;
+    src: url(../Fonts/Roboto-ThinItalic.ttf);
+}
+
+
+html body {
+    width: 100%;
+    margin: 0;
+    height: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    height: 10%;
+    justify-content: space-between;
+    background-color: #1B396A;
+}
+
+    header nav {
+        display: flex;
+        align-items: center;
+    }
+
+        header nav p {
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+        }
+
+    header img {
+        height: 80%;
+    }
+
+    header .imgU {
+        height: 50%;
+    }
+
+.content {
+    flex: 1;
+    height: auto;
+    display: flex;
+    background-color: whitesmoke;
+}
+
+
+.Boton1 {
+    width: 25%;
+    border-right: 5px solid #D9D9D9;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+}
+
+.Boton2 {
+    width: 100%;
+    height: 70px;
+    background: white;
+    color: white;
+    font-weight: bold;
+    margin-top: 70px;
+}
+
+    .Boton2 input {
+        width: 100%;
+        height: 60px;
+        background: #1B396A;
+        color: white;
+        font-weight: bold;
+        border: none;
+    }
+
+.Boton3 {
+    width: 100%;
+    height: 70px;
+    background: #1B396A;
+    color: white;
+    font-weight: bold;
+    margin-top: 70px;
+}
+
+    .Boton3 input {
+        width: 100%;
+        height: 60px;
+        background: #1B396A;
+        color: white;
+        font-weight: bold;
+        border: none;
+    }
+
+
+.solicitudes {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    display: block;
+}
+
+
+    .solicitudes .tareas {
+        display: flex;
+        position: relative;
+        width: 100%;
+        margin-top: 28px;
+        height: 6%;
+    }
+
+.tareas button {
+    margin: 10px;
+    width: 100%;
+    height: 20px;
+    border: none;
+    background: #1B396A;
+    color: white;
+    font-family: fuente;
+}
+
+ul {
+    margin-top: 29px;
+    margin-left: -30px;
+    margin-right: 20px;
+}
+
+    ul li {
+        list-style: none;
+        position: relative;
+        display: flex;
+        background-color: #E4E4E4;
+        padding: 18px 19px;
+        font-family: fuente;
+        font-weight: bold;
+        font-size: 19px;
+        margin-top: 10px;
+        font-family: fuente;
+    }
+
+.solicitudes .NumControl {
+    position: absolute;
+    right: 12px;
+    transform: translateY(-50%);
+    top: 50%;
+}
