@@ -159,14 +159,14 @@ div a {
 }
 
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 500px) {
 
 
     div form {
-        width: 90%;
+        width: 80%;
     }
 
-    div input {
+    /*div input {
        
         height: 80px;
     }
@@ -206,6 +206,6 @@ div a {
     }
     .modal strong {
         font-size: 35px;
-    }
+    }*/
     
 }

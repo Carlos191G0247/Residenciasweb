@@ -46,6 +46,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 window.location.href = "/admin/departamento/verListadeCarreras";
             } else if (numeroDeControl.length === 8) {
                 window.location.href = "/login/Tareas";
+            }
+             else if (numeroDeControl.length === 2) {
+                window.location.href = "/login/Solicitudes";
             } 
         }
     });
