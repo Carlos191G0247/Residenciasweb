@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
             formRecuperar.parentElement.style.display = "none";
             formMensaje.parentElement.style.display = "flex";
         } else if (e.target.tagName == "A" && e.target.textContent == "Registrarte") {
-            window.location.href = "/Registro/registroAdmin";
+            window.location.href = "/Registro/RegistroAlumno";
         } else if (e.target.tagName === "BUTTON" && e.target.textContent === "Iniciar Sesión") {
             const numeroDeControl = document.getElementById('numeroDeControl').value;
             if (numeroDeControl.length === 4) {
