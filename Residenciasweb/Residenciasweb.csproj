@@ -10,4 +10,13 @@
     <Folder Include="pages\admin\coordinadores\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\img\comprobado.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\img\rechazar.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
