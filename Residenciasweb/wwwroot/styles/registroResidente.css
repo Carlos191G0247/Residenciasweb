@@ -112,8 +112,10 @@ header {
             font-weight: bold;
         }
 
-
-.tareas {
+.archivo {
+    background: none;
+}
+.tareas,.archivo {
     background: #E7E7E7;
     display: flex;
     width: auto;

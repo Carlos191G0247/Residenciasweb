@@ -38,7 +38,8 @@
         </section>
 
         <div class="derecha" id="tarea1">
-            <form class="formtarea1">
+            <form class="formtarea1" method="post" action="https://localhost:7136/api/ArchivosEnviados">
+                <label></label>
                 <h2>1.Seleccion de empresas de residencias </h2>
                 <br />
                 <a>Intruccion</a>
@@ -70,8 +71,13 @@
                     <img src="/img/clip.png" />
                     <b> Adjuntar</b>
                 </nav>
-                <nav class="tareas">
-                    <p class="mitarea">00. SELECCION DE EMPRESAS DE RESIDENCIAS.PDF </p>
+               
+                <input type="file" name="archivoPdf" id="inputPdf" accept=".pdf" />
+
+                <nav class="archivo">
+                    <p class="mitarea"></p>
+                    <input type="button" id="eliminarTarea" class="eliminar-btn" value="Eliminar" />
+
                 </nav>
 
 
