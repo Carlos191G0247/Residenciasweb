@@ -34,7 +34,7 @@
 //    });
 //});
 
-
+var pdfBase64;
 document.addEventListener('DOMContentLoaded', function () {
     // Manejar clic en tareas
     const handleTareaClick = (tarea) => {
@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function () {
             container.style.display = (container.id === tareaId) ? 'flex' : 'none';
         });
     };
-    var pdfBase64;
     // Manejar cambio en el campo de entrada de archivo
     const handlePdfChange = (inputPdf, archivoNav, mitarea) => {
         inputPdf.addEventListener('change', function () {
@@ -89,12 +88,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     };
 
+    
+
     // Obtener elementos del DOM
     const inputPdf = document.getElementById('inputPdf');
     const archivoNav = document.querySelector('.archivo');
     const mitarea = document.querySelector('.mitarea');
     const tareas = document.querySelectorAll('ul li a');
-
+            
     // Manejar clic en cada tarea
     tareas.forEach(tarea => {
         tarea.addEventListener('click', () => handleTareaClick(tarea));
@@ -112,3 +113,57 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+
+const enviarBtn = document.getElementById("enviarBtn");
+const formulario = document.querySelector('.formtarea1');
+
+enviarBtn.addEventListener("click", async function (event) {
+    event.preventDefault();
+
+    // Encuentra el formulario asociado al botón clickeado
+    let form = event.target;
+
+    // Asegúrate de tener el valor correcto para pdfBase64
+
+    let json = {
+        IdResidente: 7,
+        NombreArchivo: "mi_archivo.pdf",
+        FechaEnvio: new Date().toISOString(),
+        NumTarea: 1,
+    };
+
+    let response = await fetch("https://localhost:7136/api/ArchivosEnviados", {
+            method: 'POST',
+            body: JSON.stringify(json),
+            headers: {
+                "content-type": "application/json"
+            }
+
+        });
+
+    if (response.ok) {
+
+        let idobj = await response.json();
+        console.log(idobj);
+        if (pdfBase64 != null) {
+            let json = {
+                Id: idobj,
+                pdfBase64: pdfBase64.replace("data:application/pdf;base64,", "") 
+            };
+            let response = await fetch("https://localhost:7136/api/ArchivosEnviados/PDF",{
+                method: 'POST',
+                body: JSON.stringify(json),
+                headers: {
+                    "content-type": "application/json"
+                }
+            })
+
+
+        }
+       
+        }
+        else {
+            console.log("mamo")
+        }
+    
+});
