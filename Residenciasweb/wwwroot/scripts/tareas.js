@@ -1,39 +1,4 @@
 ﻿
-//const tareas = document.querySelectorAll('ul li a');
-
-//tareas.forEach(tarea => {
-//    tarea.addEventListener('click', () => {
-//        const tareaId = tarea.getAttribute('data-tarea');
-//        const tareasContainer = document.querySelectorAll('.derecha');
-
-//        tareasContainer.forEach(container => {
-//            if (container.id === tareaId) {
-//                container.style.display = 'flex'; 
-//            } else {
-//                container.style.display = 'none'; 
-//            }
-//        });
-//    });
-//});
-
-//document.addEventListener('DOMContentLoaded', function () {
-//    var inputPdf = document.getElementById('inputPdf');
-//    var archivoNav = document.querySelector('.archivo');
-//    var mitarea = document.querySelector('.mitarea');
-
-//    // Manejar el cambio en el campo de entrada de archivo
-//    inputPdf.addEventListener('change', function () {
-//        if (inputPdf.files.length > 0) {
-//            var fileName = inputPdf.files[0].name; // Obtener el nombre del archivo seleccionado
-//            mitarea.textContent = fileName; // Mostrar el nombre del archivo en el elemento con la clase "mitarea"
-//            archivoNav.style.display = 'flex'; // Mostrar el elemento con la clase "archivo"
-//        } else {
-//            mitarea.textContent = ''; // Limpiar el contenido del elemento con la clase "mitarea"
-//            archivoNav.style.display = 'none'; // Ocultar el elemento con la clase "archivo"
-//        }
-//    });
-//});
-
 var pdfBase64;
 document.addEventListener('DOMContentLoaded', function () {
     // Manejar clic en tareas
@@ -109,61 +74,76 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Manejar clic en el botón para eliminar la tarea
     handleEliminarTareaClick(inputPdf, archivoNav, mitarea);
-});
 
 
 
+    const enviarBtn = document.getElementById("enviarBtn");
+    const formulario = document.querySelector('.formtarea1');
+    const erroresLabel = document.querySelector('.errores');
 
-const enviarBtn = document.getElementById("enviarBtn");
-const formulario = document.querySelector('.formtarea1');
+    var errores = erroresLabel;
+    enviarBtn.addEventListener("click", async function (event) {
+        event.preventDefault();
 
-enviarBtn.addEventListener("click", async function (event) {
-    event.preventDefault();
+        errores.textContent = null;
+        // Encuentra el formulario asociado al botón clickeado
+        let form = event.target.closest('form');;
 
-    // Encuentra el formulario asociado al botón clickeado
-    let form = event.target;
 
-    // Asegúrate de tener el valor correcto para pdfBase64
-
-    let json = {
-        IdResidente: 7,
-        NombreArchivo: "mi_archivo.pdf",
-        FechaEnvio: new Date().toISOString(),
-        NumTarea: 1,
-    };
-
-    let response = await fetch("https://localhost:7136/api/ArchivosEnviados", {
-            method: 'POST',
-            body: JSON.stringify(json),
-            headers: {
-                "content-type": "application/json"
-            }
-
-        });
-
-    if (response.ok) {
-
-        let idobj = await response.json();
-        console.log(idobj);
         if (pdfBase64 != null) {
             let json = {
-                Id: idobj,
-                pdfBase64: pdfBase64.replace("data:application/pdf;base64,", "") 
+                IdResidente: form.elements.idres.value,
+                NombreArchivo: "mi_archivo.pdf",
+                FechaEnvio: new Date().toISOString(),
+                NumTarea: form.elements.ntarea.value,
             };
-            let response = await fetch("https://localhost:7136/api/ArchivosEnviados/PDF",{
+
+            let response = await fetch("https://localhost:7136/api/ArchivosEnviados", {
                 method: 'POST',
                 body: JSON.stringify(json),
                 headers: {
                     "content-type": "application/json"
                 }
-            })
+
+            });
+
+            if (response.ok) {
+
+                let idobj = await response.json();
+                console.log(idobj);
+                if (pdfBase64 != null) {
+                    let json = {
+                        Id: idobj,
+                        pdfBase64: pdfBase64.replace("data:application/pdf;base64,", "")
+                    };
+                    let response = await fetch("https://localhost:7136/api/ArchivosEnviados/PDF", {
+                        method: 'POST',
+                        body: JSON.stringify(json),
+                        headers: {
+                            "content-type": "application/json"
+                        }
+                    })
 
 
+                }
+
+            }
+            else {
+                errores.textContent = "Fallo al subir el pdf.";
+            }
+
         }
-       
-        }
+
         else {
-            console.log("mamo")
+
+            errores.textContent = "Debes adjuntar un archivo PDF antes de enviar.";
         }
-    
+
+
+    });
 });
+
+
+
+
+

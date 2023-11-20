@@ -38,9 +38,9 @@
         </section>
 
         <div class="derecha" id="tarea1">
-            <form class="formtarea1" method="post" action="https://localhost:7136/api/ArchivosEnviados">
-                <label name="IdResidente">1</label>
-                <label name="NumeroTar">1</label>
+            <form class="formtarea1">
+                <input name="idres" type="number" value="7" />
+                <input name="ntarea" type="number" value="1" />
                 <h2>1.Seleccion de empresas de residencias </h2>
                 <br />
                 <a>Intruccion</a>
@@ -83,6 +83,7 @@
 
 
                 <div class="enviar">
+                    <label class="errores"></label>
                     <div>
                         <p>No entregado</p>
                         <input type="submit" id="enviarBtn" value="Enviar" />
@@ -99,6 +100,8 @@
 
         <div class="derecha" id="tarea2">
             <form class="formtarea2">
+                <input name="idres" type="number" value="7" />
+                <input name="ntarea" type="number" value="2" />
                 <h2>1.Seleccion de empresas de residencias </h2>
                 <br />
                 <a>Intruccion</a>
@@ -116,7 +119,6 @@
                     Ante cualquier duda o consulta adicional, no duden en comunicarse con nosotros en el canal General.
                 </p>
 
-
                 <a>Descargar</a>
                 <nav class="tareas">
                     <img src="/img/pdf.png" />
@@ -126,19 +128,27 @@
                     <img src="/img/clip.png" />
                     <b> Adjuntar</b>
                 </nav>
-                <nav class="tareas">
-                    <p class="mitarea">00. SELECCION DE EMPRESAS DE RESIDENCIAS.PDF </p>
+
+                <input type="file" name="archivoPdf" id="inputPdf" accept=".pdf" />
+
+                <nav class="archivo">
+                    <p class="mitarea"></p>
+                    <input type="button" id="eliminarTarea" class="eliminar-btn" value="Eliminar" />
+
                 </nav>
 
 
                 <div class="enviar">
+                    <label class="errores"></label>
                     <div>
                         <p>No entregado</p>
-                        <input type="button" value="Enviar" />
+                        <input type="submit" id="enviarBtn" value="Enviar" />
                     </div>
 
 
                 </div>
+          
+
             </form>
 
         </div>
