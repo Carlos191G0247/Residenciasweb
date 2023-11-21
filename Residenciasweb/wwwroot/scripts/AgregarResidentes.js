@@ -6,8 +6,17 @@
     formulario.addEventListener('submit', async function (event) {
         event.preventDefault(); // Evita el comportamiento predeterminado del formulario
         let form = event.target.closest('form');;
+        const erroresLabel = document.querySelector('.errores');
+        var errores = erroresLabel;
+        const contrasena = form.elements.contraseña.value;
+        const confirmarContrasena = form.elements.confirmarContraseña.value;
 
-        // Crea un objeto con los datos del formulario
+        // Verifica si las contraseñas coinciden
+        if (contrasena !== confirmarContrasena) {
+            // Muestra un mensaje de error o realiza alguna acción
+            errores.textContent = "Las contraseñas no coinciden";
+            return; // Evita continuar con el envío del formulario
+        }
         let json = {
             NombreCompleto: form.elements.nombre.value,
             NumControl: form.elements.numcontrol.value,
@@ -29,6 +38,9 @@
 
             if (!response.ok) {
                 throw new Error('Hubo un problema con la solicitud.');
+            }
+            else {
+
             }
 
             // Espera la conversión de la respuesta a formato JSON
