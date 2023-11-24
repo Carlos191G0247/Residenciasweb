@@ -29,10 +29,52 @@ var modalElement = document.querySelector(".modal");
 
 //});
 document.addEventListener("DOMContentLoaded", function () {
+
+    const enviarBtn = document.getElementById("recuperarbtn");
+
+    enviarBtn.addEventListener("click", async function (event) {
+
+        event.preventDefault();
+        let form = event.target.closest('form');;
+
+        let json = {
+            Numcontrol: form.elements.numControl.value,          
+        };
+        
+        let response = await fetch("https://localhost:7136/api/CambiarContrasena/login", {
+            method: 'POST',
+            body: JSON.stringify(json),
+            headers: {
+                "content-type": "application/json"
+            }
+
+        });
+
+        if (response.ok) {
+            let idobj = await response.json();
+            console.log(idobj);
+
+            //let json = {
+            //    Id: idobj,
+            //};
+
+            //let response = await fetch("https://localhost:7136/api/CambiarContrasena", {
+            //    method: 'PUT',
+            //    body: JSON.stringify(json),
+            //    headers: {
+            //        "content-type": "application/json"
+            //    }
+
+            //});
+        }
+    });
     document.body.addEventListener("click", function (e) {
         if (e.target.tagName == "A" && e.target.textContent == "¿Olvidaste tu contraseña?") {
             formRecuperar.parentElement.style.display = "flex";
             formMensaje.parentElement.style.display = "none";
+
+
+            
         } else if (e.target.tagName == "INPUT" && e.target.value == "Cancelar") {
             modalElement.style.display = "none";
         } else if (e.target.tagName == "INPUT" && e.target.value == "Recuperar") {
