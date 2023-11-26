@@ -31,7 +31,7 @@
             <label>Contraseña:</label>
             <input type="password">
 
-            <a>¿Olvidaste tu contraseña?</a><br />
+            <a id="olvidaste" >¿Olvidaste tu contraseña?</a><br />
             <button type="button">Iniciar Sesión</button><br />
 
             <a>Registrarte</a>
@@ -46,9 +46,10 @@
             <h1>Recuperar Contraseña</h1>
             <h3>Introduce tu correo institucional y tu numero de control</h3>
             <input name="numControl" type="text" placeholder="Número de control" maxlength="10" />
+            <label class="errores"></label>
             <hr />
             <div>
-                <input type="button" value="Cancelar" />
+                <input class="cancelarbtn" type="button" value="Cancelar" />
                 <input class="botonrecuperar" type="submit" id="recuperarbtn" value="Recuperar" />
             </div>
             
@@ -59,7 +60,18 @@
            <h1>Recuperar Contraseña</h1>
 
             <a>Te informamos que su preceso de recuperacion de contraseña a sido exitoso</a>
-            <strong @* style="text-transform:uppercase" *@>Se le enviara una nueva contraseña al correo agregado y esto tardara un lapso de 24 - 78 horas </strong>
+            <strong>Se le enviara una nueva contraseña al correo agregado y esto tardara un lapso de 24 - 78 horas </strong>
+            <hr />
+            <input class="botonfinalizar" type="submit" value="Finalizar" />
+        </form>
+    </div>
+
+    <div class="modal">
+        <form class="formMensajeFallo">
+            <h1>Recuperar Contraseña</h1>
+
+            <a>Te informamos que su preceso de recuperacion de contraseña a Fallado</a>
+            <strong>Vuelve a intentarlo o acude con tu coordinador de carrera </strong>
             <hr />
             <input class="botonfinalizar" type="submit" value="Finalizar" />
         </form>
