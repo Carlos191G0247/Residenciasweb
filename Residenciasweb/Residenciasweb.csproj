@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="pages\admin\coordinadores\" />
+    <Compile Remove="pages\admin\coordinadores\**" />
+    <Content Remove="pages\admin\coordinadores\**" />
+    <EmbeddedResource Remove="pages\admin\coordinadores\**" />
+    <None Remove="pages\admin\coordinadores\**" />
   </ItemGroup>
 
   <ItemGroup>
