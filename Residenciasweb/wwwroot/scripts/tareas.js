@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 NumTarea: form.elements.ntarea.value,
             };
 
-            let response = await fetch("https://localhost:7136/api/ArchivosEnviados", {
+            let response = await fetch("https://apiresidenciaswebca.sistemas19.com/api/ArchivosEnviados", {
                 method: 'POST',
                 body: JSON.stringify(json),
                 headers: {
@@ -106,17 +106,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
             });
+            //validar que exista el usuario
 
             if (response.ok) {
 
-                let idobj = await response.json();
+                let idobj = await response1.json();
                 console.log(idobj);
                 if (pdfBase64 != null) {
                     let json = {
                         Id: idobj,
                         pdfBase64: pdfBase64.replace("data:application/pdf;base64,", "")
                     };
-                    let response = await fetch("https://localhost:7136/api/ArchivosEnviados/PDF", {
+                    let response1 = await fetch("https://apiresidenciaswebca.sistemas19.com/api/ArchivosEnviados/PDF", {
                         method: 'POST',
                         body: JSON.stringify(json),
                         headers: {

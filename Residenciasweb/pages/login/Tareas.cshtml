@@ -4,15 +4,25 @@
 }
 <html>
 <head>
+
     <link href="~/styles/registroresidente.css" rel="stylesheet" />
     <title></title>
 </head>
 
 <body>
-    <header>
+    <header id="Header">
         <nav>
             <img src="~/img/logo.png" />
         </nav>
+
+        <nav>
+            <p></p>
+        </nav>
+
+        <nav>
+            <img class="imgU" src="~/img/usuario.png" />
+        </nav>
+
     </header>
     <div class="contenedor">
         <section class="list">
@@ -39,8 +49,8 @@
 
         <div class="derecha" id="tarea1">
             <form class="formtarea1">
-                <input name="idres" type="number" value="7" />
-                <input name="ntarea" type="number" value="1" />
+                <input class="btn" name="idres" type="number" value="13" />
+                <input class="btn" name="ntarea" type="number" value="1" />
                 <h2>1.Seleccion de empresas de residencias </h2>
                 <br />
                 <a>Intruccion</a>
@@ -73,7 +83,7 @@
                     <b> Adjuntar</b>
                 </nav>
                
-                <input type="file" name="archivoPdf" id="inputPdf" accept=".pdf" />
+                <input type="file" name="archivoPdf" id="inputPdf" class="btnadjuntar" accept=".pdf" />
 
                 <nav class="archivo">
                     <p class="mitarea"></p>

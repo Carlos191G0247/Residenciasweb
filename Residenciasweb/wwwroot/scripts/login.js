@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
             Numcontrol: form.elements.numControl.value,
         };
 
-        let response = await fetch("https://localhost:7136/api/CambiarContrasena/login", {
+        let response = await fetch("https://apiresidenciaswebca.sistemas19.com/api/CambiarContrasena/login", {
             method: 'POST',
             body: JSON.stringify(json),
             headers: {
@@ -46,12 +46,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 Id: idobj,
             };
 
-            let response2 = await fetch("https://localhost:7136/api/CambiarContrasena", {
+            let response2 = await fetch("https://apiresidenciaswebca.sistemas19.com/api/CambiarContrasena", {
                 method: 'PUT',
                 body: JSON.stringify(json2),
                 headers: {
                     "content-type": "application/json"
-                }
+                },
 
             });
 
@@ -95,26 +95,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     
   
-    //document.body.addEventListener("click", function (e) {
-    //    if (e.target.tagName == "A" && e.target.textContent == "¿Olvidaste tu contraseña?") {
-    //        formRecuperar.parentElement.style.display = "flex";
-    //        formMensaje.parentElement.style.display = "none";
+    document.body.addEventListener("click", function (e) {
+        
 
-
-    //    } else if (e.target.tagName == "A" && e.target.textContent == "Registrarte") {
-    //        window.location.href = "/Registro/RegistroAlumno";
-    //    } else if (e.target.tagName === "BUTTON" && e.target.textContent === "Iniciar Sesión") {
-    //        const numeroDeControl = document.getElementById('numeroDeControl').value;
-    //        if (numeroDeControl.length === 4) {
-    //            window.location.href = "/admin/departamento/verListadeCarreras";
-    //        } else if (numeroDeControl.length === 8) {
-    //            window.location.href = "/login/Tareas";
-    //        }
-    //        else if (numeroDeControl.length === 2) {
-    //            window.location.href = "/login/Solicitudes";
-    //        }
-    //    }
-    //});
+         if (e.target.tagName == "A" && e.target.textContent == "Registrarte") {
+            window.location.href = "/Registro/RegistroAlumno";
+        } else if (e.target.tagName === "BUTTON" && e.target.textContent === "Iniciar Sesión") {
+            const numeroDeControl = document.getElementById('numeroDeControl').value;
+            if (numeroDeControl.length === 4) {
+                window.location.href = "/admin/departamento/verListadeCarreras";
+            } else if (numeroDeControl.length === 8) {
+                window.location.href = "/login/Tareas";
+            }
+            else if (numeroDeControl.length === 2) {
+                window.location.href = "/login/Solicitudes";
+            }
+        }
+    });
 });
 
 

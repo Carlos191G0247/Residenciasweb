@@ -1,4 +1,5 @@
-﻿html, body {
+﻿
+html, body {
     width: 100%;
     height: 100%;
     margin: 0;
@@ -10,8 +11,39 @@
 header {
     background-color: #1B396A;
     text-align: start;
-    height: 10%;
+    width: 100%;
+    height: 9%;
+    
+    display: flex;
+    justify-content: space-between;
+    background-color: #1B396A;
 }
+
+    header nav {
+        display: flex;
+        align-items: center;
+    }
+
+        header nav p {
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+        }
+
+    header img {
+        height: 80%;
+    }
+
+    header .imgU {
+        height: 40%;
+    }
+
+
+
+
+
+
+
 
     header img {
         height: 100%;
@@ -20,20 +52,22 @@ header {
 .contenedor {
     flex: 1;
     height: auto;
-    width:auto;
+    width: auto;
     display: flex;
+   
 }
 
 .list {
     flex: 1;
-    min-width:180px;
+    min-width: 180px;
     width: 20%;
-    border-right:solid;
-    border-color:black;
+    border-right: solid;
+    border-color: lightgray;
     display: flex;
     flex-direction: column;
     height: 100%;
 }
+
     .list div {
         flex: 1;
         display: flex;
@@ -50,8 +84,8 @@ header {
             padding: 0;
             margin: 0;
             width: 100%;
-
         }
+
             .list div ul li {
                 width: 95%;
                 display: flex;
@@ -62,22 +96,21 @@ header {
                 flex: 1;
                 flex-wrap: wrap;
             }
-           
+
             .list div ul content {
                 background: #E4E4E4;
                 width: 100%;
                 margin: 0px;
                 text-align: center;
-                
             }
 
 
 .derecha {
-    
-    display:none;
+    display: none;
     width: 80%;
-    margin:5px;
+    margin: 5px;
 }
+
     .derecha#tarea1 {
         display: flex;
     }
@@ -115,7 +148,19 @@ header {
 .archivo {
     background: none;
 }
-.tareas,.archivo {
+
+    .archivo input {
+        padding: 8px 20px;
+        height: auto;
+        color: white;
+        text-align: center;
+        background-color: #1B396A;
+        text-decoration: none;
+        border: none;
+    }
+
+
+.tareas, .archivo {
     background: #E7E7E7;
     display: flex;
     width: auto;
@@ -124,15 +169,17 @@ header {
     margin-left: 10px;
     padding: 0;
 }
+
     .tareas p {
         padding: 5px;
     }
-    .derecha img{
-        width:30px;
-        height:30px;
-        margin-left:10px;
-        
-    }
+
+.derecha img {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+}
+
 .adjuntar {
     display: flex;
     width: auto;
@@ -141,8 +188,8 @@ header {
     margin-left: 10px;
     padding: 0;
 }
-    .adjuntar b {
 
+    .adjuntar b {
         margin: 10px 20px;
         font-size: 20px;
         color: #1B396A;
@@ -154,41 +201,66 @@ header {
     margin: 10px -10px;
     align-items: end;
 }
-    .enviar div{
 
-        display:flex;
-        justify-content:end;
-
+    .enviar div {
+        display: flex;
+        justify-content: end;
     }
-        .enviar div input {
 
+        .enviar div input {
             width: auto;
             height: auto;
             padding: 5px;
             font-size: 24px;
             background: #DCD7D7;
             color: #515050;
-            border:none;
+            border: none;
         }
+
         .enviar div p {
             color: #D4D4D4;
         }
 
 
+.btnadjuntar {
+    margin: 10px;
+    background: #E7E7E7;
+    color: black;
+    font-family: fuente;
+    font-size: 15px;
+    box-shadow: 2px 2px 2px black;
+    width: 350px;
+    outline: none;
+}
+
+::-webkit-file-upload-button {
+    color: white;
+    background: #1B396A;
+    padding: 5px;
+    border: none;
+    outline: none;
+    box-shadow: 1px 0 1px;
+}
+
+
+.errores {
+    margin-left: 20px;
+}
+
+.formtarea1, .btn {
+    display: none;
+}
 
 
 
-
-
-            @media (max-width: 768px) {
-                p {
-                    font-size: 50px; /* Tamaño de fuente más pequeño para pantallas menores o iguales a 768px */
-                }
-            }
-            /* Estilos para pantallas aún más pequeñas */
-            @media (max-width: 480px) {
-                p {
-                    font-size: 80px; /* Tamaño de fuente aún más pequeño para pantallas menores o iguales a 480px */
-                }
-            }
-
+@media (max-width: 768px) {
+    p {
+        font-size: 50px; /* Tamaño de fuente más pequeño para pantallas menores o iguales a 768px */
+    }
+}
+/* Estilos para pantallas aún más pequeñas */
+@media (max-width: 480px) {
+    p {
+        font-size: 80px; /* Tamaño de fuente aún más pequeño para pantallas menores o iguales a 480px */
+    }
+}

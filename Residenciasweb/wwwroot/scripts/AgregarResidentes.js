@@ -28,7 +28,7 @@
 
         try {
             // Realiza la petición POST usando fetch y espera la respuesta
-            const response = await fetch("https://localhost:7136/api/Residente", {
+            const response = await fetch("https://apiresidenciaswebca.sistemas19.com/api/Residente", {
                 method: 'POST',
                 body: JSON.stringify(json),
                 headers: {
@@ -53,5 +53,13 @@
             console.error('Error en la solicitud:', error);
         }
     });
+});
+
+document.body.addEventListener("click", function (e) {
+
+    if (e.target.tagName == "INPUT" && e.target.value == "Cancelar") {
+        window.history.back();
+
+    }
 });
 

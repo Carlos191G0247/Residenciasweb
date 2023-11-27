@@ -16,7 +16,7 @@ document.body.addEventListener("click", function (e) {
             divSolicitudes.style.display = "none";
             divVerListacarrera.style.display = "flex";
         } else if (e.target.value === "Registro") {
-            window.location.href = "/Registro/RegistroAdmin";
+            window.location.href = "/Registro/RegistroAlumno";
         }
 
         
