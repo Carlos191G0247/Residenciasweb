@@ -16,11 +16,10 @@
             </nav>
 
             <label>Nombre de la tarea</label>
-            <input type="text" />
+            <input name="nomtarea" type="text" />
 
             <label>Fecha de terminacion</label>
-            <input type="datetime-local" />
-
+            <input name="fechater" type="datetime-local" />
 
             <label>Numero de Tarea:</label>
             <select name="numTareas">
@@ -36,12 +35,20 @@
                 <option value="10">Nombretarea</option>
 
             </select>
-            <textarea></textarea>
+
+            <input type="file" name="archivoPdf" id="inputPdf" class="btnadjuntar" accept=".pdf" />
+
+            <textarea name="instruccion"></textarea>
+
+
+            <label class="errores"></label>
 
             <input type="button" value="cancelar" />
-            <input type="submit" value="Agregar" />
+            <input id="enviarbBtn" type="submit" value="Agregar" />
 
         </form>
     </div>
+
+    <script src="~/scripts/añadirtarea.js"></script>
 </body>
 </html>
