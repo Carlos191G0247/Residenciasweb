@@ -1,15 +1,11 @@
-﻿
-var pdfBase64;
-document.addEventListener('DOMContentLoaded', function () {
-    // Manejar clic en tareas
-    const handleTareaClick = (tarea) => {
-        const tareaId = tarea.getAttribute('data-tarea');
-        const tareasContainer = document.querySelectorAll('.derecha');
+﻿var pdfBase64;
 
-        tareasContainer.forEach(container => {
-            container.style.display = (container.id === tareaId) ? 'flex' : 'none';
-        });
-    };
+document.addEventListener('DOMContentLoaded', function () {
+    // Obtener elementos del DOM
+    const inputPdf = document.getElementById('inputPdf');
+    const archivoNav = document.querySelector('.archivo');
+    const mitarea = document.querySelector('.mitarea');
+
     // Manejar cambio en el campo de entrada de archivo
     const handlePdfChange = (inputPdf, archivoNav, mitarea) => {
         inputPdf.addEventListener('change', function () {
@@ -33,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     };
-    
+
     // Manejar clic en el nav de archivo para cambiar el PDF
     const handleArchivoNavClick = (inputPdf) => {
         const archivoNav = document.querySelector('.archivo');
@@ -53,18 +49,53 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     };
 
-    
-
-    // Obtener elementos del DOM
-    const inputPdf = document.getElementById('inputPdf');
-    const archivoNav = document.querySelector('.archivo');
-    const mitarea = document.querySelector('.mitarea');
-    const tareas = document.querySelectorAll('ul li a');
-            
     // Manejar clic en cada tarea
+    const tareas = document.querySelectorAll('ul li a');
     tareas.forEach(tarea => {
         tarea.addEventListener('click', () => handleTareaClick(tarea));
     });
+
+    function handleTareaClick(tarea) {
+        const tareaId = tarea.getAttribute('data-tarea');
+        const tareasContainer = document.querySelectorAll('.derecha');
+
+        tareasContainer.forEach(container => {
+            container.style.display = (container.id === tareaId) ? 'flex' : 'none';
+        });
+
+        // Hacer una solicitud a la API para obtener los datos de la tarea específica
+        obtenerDatosDeTarea(tareaId);
+    }
+
+    async function obtenerDatosDeTarea(tareaId) {
+        try {
+            if (tareaId !== undefined) {
+                let response = await fetch(`https://localhost:7136/api/AsginarTareas/${tareaId.substring(5)}`);
+                if (response.ok) {
+                    let datos = await response.json();
+
+                    // Actualiza el acceso a las propiedades sin el índice [0]
+                    var titulo = document.getElementById("titulo");
+                    var numeroTarea = document.getElementById("numtarea");
+                    var instruccion = document.getElementById("instruccion");
+                    var fecha = document.getElementById("fecha");
+
+                    titulo.textContent = datos.nombreTarea;
+                    numeroTarea.value = datos.numTarea;
+                    instruccion.textContent = datos.intruccion;
+                    fecha.textContent = datos.fecha;
+
+                    console.log("Archivos enviados:", datos);
+                } else {
+                    console.error("Error al obtener archivos enviados");
+                }
+            }
+        } catch (error) {
+            console.error("Error de red:", error);
+        }
+    }
+
+    // ... (resto del código)
 
     // Manejar cambio en el campo de entrada de archivo
     handlePdfChange(inputPdf, archivoNav, mitarea);
@@ -74,8 +105,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Manejar clic en el botón para eliminar la tarea
     handleEliminarTareaClick(inputPdf, archivoNav, mitarea);
-
-
 
     const enviarBtn = document.getElementById("enviarBtn");
     const formulario = document.querySelector('.formtarea1');
@@ -87,8 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         errores.textContent = null;
         // Encuentra el formulario asociado al botón clickeado
-        let form = event.target.closest('form');;
-
+        let form = event.target.closest('form');
 
         if (pdfBase64 != null) {
             let json = {
@@ -104,14 +132,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 headers: {
                     "content-type": "application/json"
                 }
-
             });
-            //validar que exista el usuario
 
             if (response.ok) {
-
-                let idobj = await response1.json();
+                let idobj = await response.json();
                 console.log(idobj);
+
                 if (pdfBase64 != null) {
                     let json = {
                         Id: idobj,
@@ -123,28 +149,42 @@ document.addEventListener('DOMContentLoaded', function () {
                         headers: {
                             "content-type": "application/json"
                         }
-                    })
-
-
+                    });
                 }
-
-            }
-            else {
+            } else {
                 errores.textContent = "Fallo al subir el pdf.";
             }
-
-        }
-
-        else {
-
+        } else {
             errores.textContent = "Debes adjuntar un archivo PDF antes de enviar.";
         }
-
-
     });
+
+    var titulo = document.getElementById("titulo");
+    var numeroTarea = document.getElementById("numtarea");
+    var instruccion = document.getElementById("instruccion");
+    var fecha = document.getElementById("fecha");
+
+    async function obtenerArchivosEnviados(event) {
+        try {
+            let response = await fetch(`https://localhost:7136/api/AsginarTareas/${tareaId.substring(5)}`);
+
+            if (response.ok) {
+                let datos = await response.json();
+                titulo.textContent = datos.nombreTarea;
+                numeroTarea.value = datos.numTarea;
+                instruccion.textContent = datos.intruccion;
+                fecha.textContent = datos.fecha;
+                console.log("Archivos enviados:", datos);
+            } else {
+                console.error("Error al obtener archivos enviados");
+            }
+        } catch (error) {
+            console.error("Error de red:", error);
+        }
+    }
+
+    obtenerArchivosEnviados();
 });
-
-
 
 
 
