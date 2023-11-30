@@ -1,4 +1,5 @@
 ﻿var pdfBase64;
+let tareaActual; // Variable global para almacenar el número de tarea actual
 
 document.addEventListener('DOMContentLoaded', function () {
     // Obtener elementos del DOM
@@ -52,19 +53,15 @@ document.addEventListener('DOMContentLoaded', function () {
     // Manejar clic en cada tarea
     const tareas = document.querySelectorAll('ul li a');
     tareas.forEach(tarea => {
-        tarea.addEventListener('click', () => handleTareaClick(tarea));
+        tarea.addEventListener('click', handleTareaClick);
     });
 
-    function handleTareaClick(tarea) {
-        const tareaId = tarea.getAttribute('data-tarea');
-        const tareasContainer = document.querySelectorAll('.derecha');
-
-        tareasContainer.forEach(container => {
-            container.style.display = (container.id === tareaId) ? 'flex' : 'none';
-        });
+    function handleTareaClick(event) {
+        // Obtener el número de tarea desde el atributo data-tarea
+        tareaActual = event.target.getAttribute('data-tarea');
 
         // Hacer una solicitud a la API para obtener los datos de la tarea específica
-        obtenerDatosDeTarea(tareaId);
+        obtenerDatosDeTarea(tareaActual);
     }
 
     async function obtenerDatosDeTarea(tareaId) {
@@ -163,11 +160,18 @@ document.addEventListener('DOMContentLoaded', function () {
     var numeroTarea = document.getElementById("numtarea");
     var instruccion = document.getElementById("instruccion");
     var fecha = document.getElementById("fecha");
+    var vertareapdf = document.getElementById("tareapdf");
+    var mostrarnombre = document.getElementById("mostrarnombre");
+    var traerid = document.getElementById("traeidresidente");
+    
 
+    vertareapdf.addEventListener('click', function () {
+        nuevaRuta = `https://localhost:7136/tareasasignadas/${tareaActual.substring(5)+".pdf"}`;
+        window.open(nuevaRuta, '_blank');
+    });
     async function obtenerArchivosEnviados(event) {
         try {
-            let response = await fetch(`https://localhost:7136/api/AsginarTareas/${tareaId.substring(5)}`);
-
+            let response = await fetch(`https://localhost:7136/api/AsginarTareas/${tareaActual.substring(5)}`);
             if (response.ok) {
                 let datos = await response.json();
                 titulo.textContent = datos.nombreTarea;
@@ -178,13 +182,26 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 console.error("Error al obtener archivos enviados");
             }
+
+           
         } catch (error) {
             console.error("Error de red:", error);
         }
     }
+    async function obtenernombre() {
+        let response2 = await fetch(`https://localhost:7136/api/Residente/${traerid.value}`);
+        if (response2.ok) {
+            let datos2 = await response2.text();
+            console.log("Archivos enviados:", datos2);
 
+            mostrarnombre.textContent = datos2;
+        }
+        else {
+            console.log("no trajo el nombre");
+        }
+    }
+    obtenernombre();
     obtenerArchivosEnviados();
 });
-
 
 
