@@ -71,7 +71,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (response.ok) {
                     let datos = await response.json();
 
-                    // Actualiza el acceso a las propiedades sin el índice [0]
                     var titulo = document.getElementById("titulo");
                     var numeroTarea = document.getElementById("numtarea");
                     var instruccion = document.getElementById("instruccion");
@@ -82,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     mostrarnombrepdf.textContent = datos.nombreTarea+".PDF";
                     numeroTarea.value = datos.numTarea;
                     instruccion.textContent = datos.intruccion;
-                    fecha.textContent = datos.fecha;
+                    fecha.textContent = datos.fecha.replace("T", " ");
 
                     console.log("Archivos enviados:", datos);
                 } else {
@@ -165,6 +164,15 @@ document.addEventListener('DOMContentLoaded', function () {
     var vertareapdf = document.getElementById("tareapdf");
     var mostrarnombre = document.getElementById("mostrarnombre");
     var traerid = document.getElementById("traeidresidente");
+
+    var cerrarsesion = document.getElementById("cerrarsesion");
+
+
+    cerrarsesion.addEventListener('click', function () {
+        window.location.replace("https://localhost:7113/login/index");
+
+    });
+
 
 
     vertareapdf.addEventListener('click', function () {
