@@ -76,8 +76,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     var numeroTarea = document.getElementById("numtarea");
                     var instruccion = document.getElementById("instruccion");
                     var fecha = document.getElementById("fecha");
+                    var mostrarnombrepdf = document.getElementById("nombredelpdf");
 
                     titulo.textContent = datos.nombreTarea;
+                    mostrarnombrepdf.textContent = datos.nombreTarea+".PDF";
                     numeroTarea.value = datos.numTarea;
                     instruccion.textContent = datos.intruccion;
                     fecha.textContent = datos.fecha;
@@ -156,38 +158,20 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    var titulo = document.getElementById("titulo");
-    var numeroTarea = document.getElementById("numtarea");
-    var instruccion = document.getElementById("instruccion");
-    var fecha = document.getElementById("fecha");
+    //var titulo = document.getElementById("titulo");
+    //var numeroTarea = document.getElementById("numtarea");
+    //var instruccion = document.getElementById("instruccion");
+    //var fecha = document.getElementById("fecha");
     var vertareapdf = document.getElementById("tareapdf");
     var mostrarnombre = document.getElementById("mostrarnombre");
     var traerid = document.getElementById("traeidresidente");
-    
+
 
     vertareapdf.addEventListener('click', function () {
         nuevaRuta = `https://localhost:7136/tareasasignadas/${tareaActual.substring(5)+".pdf"}`;
         window.open(nuevaRuta, '_blank');
     });
-    async function obtenerArchivosEnviados(event) {
-        try {
-            let response = await fetch(`https://localhost:7136/api/AsginarTareas/${tareaActual.substring(5)}`);
-            if (response.ok) {
-                let datos = await response.json();
-                titulo.textContent = datos.nombreTarea;
-                numeroTarea.value = datos.numTarea;
-                instruccion.textContent = datos.intruccion;
-                fecha.textContent = datos.fecha;
-                console.log("Archivos enviados:", datos);
-            } else {
-                console.error("Error al obtener archivos enviados");
-            }
-
-           
-        } catch (error) {
-            console.error("Error de red:", error);
-        }
-    }
+  
     async function obtenernombre() {
         let response2 = await fetch(`https://localhost:7136/api/Residente/${traerid.value}`);
         if (response2.ok) {
