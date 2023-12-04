@@ -1,13 +1,11 @@
 ﻿var pdfBase64;
-let tareaActual; // Variable global para almacenar el número de tarea actual
+let tareaActual; 
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Obtener elementos del DOM
     const inputPdf = document.getElementById('inputPdf');
     const archivoNav = document.querySelector('.archivo');
     const mitarea = document.querySelector('.mitarea');
 
-    // Manejar cambio en el campo de entrada de archivo
     const handlePdfChange = (inputPdf, archivoNav, mitarea) => {
         inputPdf.addEventListener('change', function () {
             if (inputPdf.files.length > 0) {
@@ -16,11 +14,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 mitarea.textContent = fileName;
                 archivoNav.style.display = 'flex';
 
-                // Leer el contenido del archivo como base64
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     const base64Content = e.target.result;
-                    // Aquí puedes hacer lo que quieras con el contenido base64, como guardarlo en una variable.
                     pdfBase64 = base64Content;
                 };
                 reader.readAsDataURL(file);
@@ -31,37 +27,61 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     };
 
-    // Manejar clic en el nav de archivo para cambiar el PDF
     const handleArchivoNavClick = (inputPdf) => {
         const archivoNav = document.querySelector('.archivo');
         archivoNav.addEventListener('click', function () {
-            // Abrir el diálogo de selección de archivo al hacer clic en el nav
             inputPdf.click();
         });
     };
 
-    // Manejar clic en el botón para eliminar la tarea
     const handleEliminarTareaClick = (inputPdf, archivoNav, mitarea) => {
         const eliminarTareaBtn = document.getElementById('eliminarTarea');
         eliminarTareaBtn.addEventListener('click', function () {
             mitarea.textContent = '';
             archivoNav.style.display = 'none';
-            inputPdf.value = ''; // Vaciar el campo de entrada de archivos
+            inputPdf.value = ''; 
         });
     };
 
-    // Manejar clic en cada tarea
     const tareas = document.querySelectorAll('ul li a');
     tareas.forEach(tarea => {
         tarea.addEventListener('click', handleTareaClick);
     });
 
-    function handleTareaClick(event) {
-        // Obtener el número de tarea desde el atributo data-tarea
+    async function handleTareaClick(event) {
+
         tareaActual = event.target.getAttribute('data-tarea');
 
-        // Hacer una solicitud a la API para obtener los datos de la tarea específica
-        obtenerDatosDeTarea(tareaActual);
+   
+
+        
+
+        await obtenerDatosDeTarea(tareaActual);
+        await Traerestatus();
+
+    }
+    var verpdfbtn = document.getElementById('verpdfbtn');
+    verpdfbtn.addEventListener('click', function () {
+        
+        if (pdfBase64) {
+            const pdfBlob = base64toBlob(pdfBase64);
+
+            const pdfUrl = URL.createObjectURL(pdfBlob);
+
+            window.open(pdfUrl, '_blank');
+        } else {
+            window.open(ruta, '_blank');
+        }
+    });
+
+    function base64toBlob(base64) {
+        const byteString = atob(base64.split(',')[1]);
+        const ab = new ArrayBuffer(byteString.length);
+        const ia = new Uint8Array(ab);
+        for (let i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([ab], { type: 'application/pdf' });
     }
 
     async function obtenerDatosDeTarea(tareaId) {
@@ -71,10 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (response.ok) {
                     let datos = await response.json();
 
-                    var titulo = document.getElementById("titulo");
-                    var numeroTarea = document.getElementById("numtarea");
-                    var instruccion = document.getElementById("instruccion");
-                    var fecha = document.getElementById("fecha");
+                    
                     var mostrarnombrepdf = document.getElementById("nombredelpdf");
 
                     titulo.textContent = datos.nombreTarea;
@@ -93,15 +110,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // ... (resto del código)
 
-    // Manejar cambio en el campo de entrada de archivo
     handlePdfChange(inputPdf, archivoNav, mitarea);
 
-    // Manejar clic en el nav de archivo para cambiar el PDF
     handleArchivoNavClick(inputPdf);
 
-    // Manejar clic en el botón para eliminar la tarea
     handleEliminarTareaClick(inputPdf, archivoNav, mitarea);
 
     const enviarBtn = document.getElementById("enviarBtn");
@@ -110,57 +123,94 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var errores = erroresLabel;
     enviarBtn.addEventListener("click", async function (event) {
+
+       
         event.preventDefault();
+        if (enviarBtn.value === "Enviar") {
+            errores.textContent = null;
+            let form = event.target.closest('form');
 
-        errores.textContent = null;
-        // Encuentra el formulario asociado al botón clickeado
-        let form = event.target.closest('form');
+            if (pdfBase64 != null) {
+                let json = {
+                    IdResidente: form.elements.idres.value,
+                    NombreArchivo: "mi_archivo.pdf",
+                    FechaEnvio: new Date().toISOString(),
+                    NumTarea: form.elements.ntarea.value,
+                };
 
-        if (pdfBase64 != null) {
-            let json = {
-                IdResidente: form.elements.idres.value,
-                NombreArchivo: "mi_archivo.pdf",
-                FechaEnvio: new Date().toISOString(),
-                NumTarea: form.elements.ntarea.value,
-            };
+                let response = await fetch("https://localhost:7136/api/ArchivosEnviados", {
+                    method: 'POST',
+                    body: JSON.stringify(json),
+                    headers: {
+                        "content-type": "application/json"
+                    }
+                });
 
-            let response = await fetch("https://apiresidenciaswebca.sistemas19.com/api/ArchivosEnviados", {
-                method: 'POST',
-                body: JSON.stringify(json),
-                headers: {
-                    "content-type": "application/json"
-                }
-            });
+                if (response.ok) {
+                    let idobj = await response.json();
+                    console.log(idobj);
 
-            if (response.ok) {
-                let idobj = await response.json();
-                console.log(idobj);
+                    if (pdfBase64 != null) {
+                        let json = {
+                            Id: idobj,
+                            pdfBase64: pdfBase64.replace("data:application/pdf;base64,", "")
+                        };
+                        let response1 = await fetch("https://localhost:7136/api/ArchivosEnviados/PDF", {
+                            method: 'POST',
+                            body: JSON.stringify(json),
+                            headers: {
+                                "content-type": "application/json"
+                            }
+                        });
+                        await Traerestatus();
+                    }
 
-                if (pdfBase64 != null) {
-                    let json = {
-                        Id: idobj,
-                        pdfBase64: pdfBase64.replace("data:application/pdf;base64,", "")
-                    };
-                    let response1 = await fetch("https://apiresidenciaswebca.sistemas19.com/api/ArchivosEnviados/PDF", {
-                        method: 'POST',
-                        body: JSON.stringify(json),
-                        headers: {
-                            "content-type": "application/json"
-                        }
-                    });
+                    enviarBtn.value = "Cancelar";
+                } else {
+                    errores.textContent = "Fallo al subir el pdf.";
                 }
             } else {
-                errores.textContent = "Fallo al subir el pdf.";
+                errores.textContent = "Debes adjuntar un archivo PDF antes de enviar.";
             }
-        } else {
-            errores.textContent = "Debes adjuntar un archivo PDF antes de enviar.";
-        }
-    });
 
-    //var titulo = document.getElementById("titulo");
-    //var numeroTarea = document.getElementById("numtarea");
-    //var instruccion = document.getElementById("instruccion");
-    //var fecha = document.getElementById("fecha");
+        }
+        //eliminar el pdf
+        else {
+            let datos3 = await Traeridtarea();
+
+            try {
+                let json = {
+                    Id: datos3,
+                };
+
+                let response = await fetch(`https://localhost:7136/api/ArchivosEnviados`, {
+                    method: 'DELETE',
+                    body: JSON.stringify(json),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+
+                });
+
+                if (response.ok) {
+                    console.log('Tarea eliminada correctamente');
+                    await Traerestatus();
+                    enviarBtn.value = "Enviar";
+
+                    
+                } else {
+                    console.error('Error al intentar eliminar la tarea');
+                }
+            } catch (error) {
+                console.error('Error de red:', error);
+            }
+        }
+        
+    });
+    var titulo = document.getElementById("titulo");
+    var numeroTarea = document.getElementById("numtarea");
+    var instruccion = document.getElementById("instruccion");
+    var fecha = document.getElementById("fecha");
     var vertareapdf = document.getElementById("tareapdf");
     var mostrarnombre = document.getElementById("mostrarnombre");
     var traerid = document.getElementById("traeidresidente");
@@ -174,14 +224,19 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-
+    var ruta;//////////////////////////////////////
     vertareapdf.addEventListener('click', function () {
-        nuevaRuta = `https://localhost:7136/tareasasignadas/${tareaActual.substring(5)+".pdf"}`;
-        window.open(nuevaRuta, '_blank');
+
+        
+            nuevaRuta = `https://localhost:7136/tareasasignadas/${tareaActual.substring(5) + ".pdf"}`;
+            window.open(nuevaRuta, '_blank');
+       
+        
     });
   
     async function obtenernombre() {
         let response2 = await fetch(`https://localhost:7136/api/Residente/${traerid.value}`);
+
         if (response2.ok) {
             let datos2 = await response2.text();
             console.log("Archivos enviados:", datos2);
@@ -191,9 +246,68 @@ document.addEventListener('DOMContentLoaded', function () {
         else {
             console.log("no trajo el nombre");
         }
+        
+
+      
     }
+    var estatus = document.getElementById("estatus");
+
+    async function Traeridtarea() {
+
+        let response3 = await fetch(`https://localhost:7136/api/ArchivosEnviados/${numeroTarea.value}/${traerid.value}`);
+        if (response3.ok) {
+            let datos3 = await response3.text();
+            console.log("id de la tarea:", datos3);
+            return datos3;
+         
+        }
+        else {
+            console.log("no trajo el id de tarea");
+        }
+    }
+    async function Traerestatus() {
+        ruta = null;
+        let response3 = await fetch(`https://localhost:7136/api/ArchivosEnviados/${numeroTarea.value}/${traerid.value}`);
+        if (response3.ok) {
+            let datos3 = await response3.text();
+            console.log("id de la tarea:", datos3);
+
+            let response4 = await fetch(`https://localhost:7136/api/ArchivosEnviados/${datos3}`);
+            if (response4.ok) {
+                let datos4 = await response4.text();
+                console.log("Traer el estatus", datos4);
+                estatus.textContent = datos4;
+                if (datos4 == "Enviado") {
+                    
+                    let responsedatos = await fetch(`https://localhost:7136/api/ArchivosEnviados/todo/${datos3}`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+
+                    });
+                    if (responsedatos.ok) {
+                        let datosalumno = await responsedatos.json();
+
+                        mitarea.textContent = datosalumno.nombreArchivo;
+                        ruta = `https://localhost:7136/pdfs/${datosalumno.id + ".pdf"}`;
+
+                    }
+
+                   
+                }
+            }
+           
+
+        }
+        else {
+            ruta = null;
+            let datos5 = await response3.text();
+            estatus.textContent = datos5;
+        }
+    }
+    //Traerestatus();
     obtenernombre();
-    obtenerArchivosEnviados();
 });
 
 
