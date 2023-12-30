@@ -18,6 +18,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 reader.onload = function (e) {
                     const base64Content = e.target.result;
                     pdfBase64 = base64Content;
+
+                    // Actualizar el nombre del archivo en el atributo de datos
+                    enviarBtn.dataset.nombreArchivo = fileName;
+
                 };
                 reader.readAsDataURL(file);
             } else {
@@ -39,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
         eliminarTareaBtn.addEventListener('click', function () {
             mitarea.textContent = '';
             archivoNav.style.display = 'none';
-            inputPdf.value = ''; 
+            inputPdf.value = '';
         });
     };
 
@@ -52,17 +56,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
         tareaActual = event.target.getAttribute('data-tarea');
 
-   
 
-        
+
+
 
         await obtenerDatosDeTarea(tareaActual);
         await Traerestatus();
+        await MostrarTareaSubida();
+        //await CancelarEstado();
 
     }
     var verpdfbtn = document.getElementById('verpdfbtn');
     verpdfbtn.addEventListener('click', function () {
-        
+
         if (pdfBase64) {
             const pdfBlob = base64toBlob(pdfBase64);
 
@@ -87,15 +93,15 @@ document.addEventListener('DOMContentLoaded', function () {
     async function obtenerDatosDeTarea(tareaId) {
         try {
             if (tareaId !== undefined) {
-                let response = await fetch(`https://localhost:7136/api/AsginarTareas/${tareaId.substring(5)}`);
+                let response = await fetch(`https://localhost:7137/api/AsginarTareas/${tareaId.substring(5)}`);
                 if (response.ok) {
                     let datos = await response.json();
 
-                    
+
                     var mostrarnombrepdf = document.getElementById("nombredelpdf");
 
                     titulo.textContent = datos.nombreTarea;
-                    mostrarnombrepdf.textContent = datos.nombreTarea+".PDF";
+                    mostrarnombrepdf.textContent = datos.nombreTarea + ".PDF";
                     numeroTarea.value = datos.numTarea;
                     instruccion.textContent = datos.intruccion;
                     fecha.textContent = datos.fecha.replace("T", " ");
@@ -124,21 +130,32 @@ document.addEventListener('DOMContentLoaded', function () {
     var errores = erroresLabel;
     enviarBtn.addEventListener("click", async function (event) {
 
-       
+
         event.preventDefault();
         if (enviarBtn.value === "Enviar") {
             errores.textContent = null;
             let form = event.target.closest('form');
+            let estatustar;
 
+            let fechas = new Date();
+            if (fechas < Date.parse(fecha.textContent)) {
+                estatustar = 1;
+            }
+            else {
+                estatustar = 3;
+            }
             if (pdfBase64 != null) {
+                const nombreArchivo = enviarBtn.dataset.nombreArchivo;
+
                 let json = {
                     IdResidente: form.elements.idres.value,
-                    NombreArchivo: "mi_archivo.pdf",
+                    NombreArchivo: nombreArchivo,
                     FechaEnvio: new Date().toISOString(),
                     NumTarea: form.elements.ntarea.value,
+                    Estatus: estatustar
                 };
 
-                let response = await fetch("https://localhost:7136/api/ArchivosEnviados", {
+                let response = await fetch("https://localhost:7137/api/ArchivosEnviados", {
                     method: 'POST',
                     body: JSON.stringify(json),
                     headers: {
@@ -155,14 +172,14 @@ document.addEventListener('DOMContentLoaded', function () {
                             Id: idobj,
                             pdfBase64: pdfBase64.replace("data:application/pdf;base64,", "")
                         };
-                        let response1 = await fetch("https://localhost:7136/api/ArchivosEnviados/PDF", {
+                        let response1 = await fetch("https://localhost:7137/api/ArchivosEnviados/PDF", {
                             method: 'POST',
                             body: JSON.stringify(json),
                             headers: {
                                 "content-type": "application/json"
                             }
                         });
-                        await Traerestatus();
+                       /* await Traerestatus();*/
                     }
 
                     enviarBtn.value = "Cancelar";
@@ -176,36 +193,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         //eliminar el pdf
         else {
-            let datos3 = await Traeridtarea();
-
-            try {
-                let json = {
-                    Id: datos3,
-                };
-
-                let response = await fetch(`https://localhost:7136/api/ArchivosEnviados`, {
-                    method: 'DELETE',
-                    body: JSON.stringify(json),
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-
-                });
-
-                if (response.ok) {
-                    console.log('Tarea eliminada correctamente');
-                    await Traerestatus();
-                    enviarBtn.value = "Enviar";
-
-                    
-                } else {
-                    console.error('Error al intentar eliminar la tarea');
-                }
-            } catch (error) {
-                console.error('Error de red:', error);
-            }
+            await EliminarTarea();
+            await Traerestatus();
+            await MostrarTareaSubida();
+            /*await CancelarEstado();*/
         }
-        
+
     });
     var titulo = document.getElementById("titulo");
     var numeroTarea = document.getElementById("numtarea");
@@ -227,15 +220,66 @@ document.addEventListener('DOMContentLoaded', function () {
     var ruta;//////////////////////////////////////
     vertareapdf.addEventListener('click', function () {
 
-        
-            nuevaRuta = `https://localhost:7136/tareasasignadas/${tareaActual.substring(5) + ".pdf"}`;
-            window.open(nuevaRuta, '_blank');
-       
-        
+
+        nuevaRuta = `https://localhost:7137/tareasasignadas/${tareaActual.substring(5) + ".pdf"}`;
+        window.open(nuevaRuta, '_blank');
+
+
     });
-  
+
+
+    //Nuevo codigo//
+
+
+    async function CancelarEstado() {
+
+        let responsedatos = await fetch(`https://localhost:7137/api/ArchivosEnviados/${numeroTarea.value}`, {
+            method: 'PUT',
+            headers: {
+                "Authorization": "Bearer " + sessionStorage.jwt
+            }
+
+        });
+
+    }
+    async function EliminarTarea() {
+        let responsedatos = await fetch(`https://localhost:7137/api/ArchivosEnviados/${numeroTarea.value}`, {
+            method: 'DELETE',
+            headers: {
+                "Authorization": "Bearer " + sessionStorage.jwt
+            }
+
+        });
+    }
+    async function MostrarTareaSubida() {
+        ruta = null;
+        let response = await fetch(`https://localhost:7137/api/ArchivosEnviados/Datos/${numeroTarea.value}`, {
+            method: 'GET',
+            headers: {
+                "Authorization": "Bearer " + sessionStorage.jwt
+            }
+
+        });
+        if (response.ok) {
+            let datosalumno = await response.json();
+
+            mitarea.textContent = datosalumno.nombreArchivo;
+            ruta = `https://localhost:7137/pdfs/${datosalumno.id + ".pdf"}`;
+
+        }
+        else {
+            ruta = null;
+            mitarea.textContent = "";
+        }
+    }
+
     async function obtenernombre() {
-        let response2 = await fetch(`https://localhost:7136/api/Residente/${traerid.value}`);
+        let response2 = await fetch(`https://localhost:7137/api/Residente/nombre`, {
+            method: 'GET',
+            headers: {
+                "Authorization": "Bearer " + sessionStorage.jwt
+            }
+        });
 
         if (response2.ok) {
             let datos2 = await response2.text();
@@ -246,68 +290,121 @@ document.addEventListener('DOMContentLoaded', function () {
         else {
             console.log("no trajo el nombre");
         }
+
+    }
+    var estatus = document.getElementById("estatus");
+    async function Traerestatus() {
+
+        
+        let response2 = await fetch(`https://localhost:7137/api/ArchivosEnviados/${tareaActual.substring(5)}`, {
+            method: 'GET',
+            headers: {
+                "Authorization": "Bearer " + sessionStorage.jwt
+            }
+        });
+
+        if (response2.ok) {
+            let datos2 = await response2.text();
+            console.log("Archivos enviados:", datos2);
+
+            estatus.textContent = datos2;
+            if (datos2 == "Enviado") {
+                enviarBtn.value = "Cancelar";
+            }
+            if (datos2 == "Entregado Tarde") {
+                enviarBtn.value = "Cancelar";
+
+            }
+        }
+        else {
+            let error = await response2.text();
+            estatus.textContent = error;
+            enviarBtn.value = "Enviar";
+        }
+    }
+
+
+    ///
+
+
+
+
+
+    //async function obtenernombre() {
+    //    let response2 = await fetch(`https://localhost:7137/api/ArchivosEnviados/nombre/${numeroTarea.value}`);
+
+    //    if (response2.ok) {
+    //        let datos2 = await response2.text();
+    //        console.log("Archivos enviados:", datos2);
+
+    //        mostrarnombre.textContent = datos2;
+    //    }
+    //    else {
+    //        console.log("no trajo el nombre");
+    //    }
         
 
       
-    }
-    var estatus = document.getElementById("estatus");
+    //}
+    //var estatus = document.getElementById("estatus");
 
-    async function Traeridtarea() {
+    //async function Traeridtarea() {
 
-        let response3 = await fetch(`https://localhost:7136/api/ArchivosEnviados/${numeroTarea.value}/${traerid.value}`);
-        if (response3.ok) {
-            let datos3 = await response3.text();
-            console.log("id de la tarea:", datos3);
-            return datos3;
-         
-        }
-        else {
-            console.log("no trajo el id de tarea");
-        }
-    }
-    async function Traerestatus() {
-        ruta = null;
-        let response3 = await fetch(`https://localhost:7136/api/ArchivosEnviados/${numeroTarea.value}/${traerid.value}`);
-        if (response3.ok) {
-            let datos3 = await response3.text();
-            console.log("id de la tarea:", datos3);
+    //    let response3 = await fetch(`https://localhost:7137/api/ArchivosEnviados/${numeroTarea.value}/${traerid.value}`);
+    //    if (response3.ok) {
+    //        let datos3 = await response3.text();
+    //        console.log("id de la tarea:", datos3);
+    //        return datos3;
 
-            let response4 = await fetch(`https://localhost:7136/api/ArchivosEnviados/${datos3}`);
-            if (response4.ok) {
-                let datos4 = await response4.text();
-                console.log("Traer el estatus", datos4);
-                estatus.textContent = datos4;
-                if (datos4 == "Enviado") {
-                    
-                    let responsedatos = await fetch(`https://localhost:7136/api/ArchivosEnviados/todo/${datos3}`, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
+    //    }
+    //    else {
+    //        console.log("no trajo el id de tarea");
+    //    }
+    //}
+    //async function Traerestatus() {
+    //    ruta = null;
+    //    let response3 = await fetch(`https://localhost:7137/api/ArchivosEnviados/${numeroTarea.value}/${traerid.value}`);
+    //    if (response3.ok) {
+    //        let datos3 = await response3.text();
+    //        console.log("id de la tarea:", datos3);
 
-                    });
-                    if (responsedatos.ok) {
-                        let datosalumno = await responsedatos.json();
+    //        let response4 = await fetch(`https://localhost:7137/api/ArchivosEnviados/${datos3}`);
+    //        if (response4.ok) {
+    //            let datos4 = await response4.text();
+    //            console.log("Traer el estatus", datos4);
+    //            estatus.textContent = datos4;
+    //            if (datos4 == "Enviado") {
 
-                        mitarea.textContent = datosalumno.nombreArchivo;
-                        ruta = `https://localhost:7136/pdfs/${datosalumno.id + ".pdf"}`;
+    //                let responsedatos = await fetch(`https://localhost:7137/api/ArchivosEnviados/todo/${datos3}`, {
+    //                    method: 'GET',
+    //                    headers: {
+    //                        'Content-Type': 'application/json',
+    //                    },
 
-                    }
+    //                });
+    //                if (responsedatos.ok) {
+    //                    let datosalumno = await responsedatos.json();
 
-                   
-                }
-            }
-           
+    //                    mitarea.textContent = datosalumno.nombreArchivo;
+    //                    ruta = `https://localhost:7137/pdfs/${datosalumno.id + ".pdf"}`;
 
-        }
-        else {
-            ruta = null;
-            let datos5 = await response3.text();
-            estatus.textContent = datos5;
-        }
-    }
-    //Traerestatus();
+    //                }
+
+
+    //            }
+    //        }
+
+
+    //    }
+    //    else {
+    //        ruta = null;
+    //        let datos5 = await response3.text();
+    //        estatus.textContent = datos5;
+    //    }
+    //}
+ /*   MostrarTareaSubida();*/
     obtenernombre();
+  
 });
 
 
