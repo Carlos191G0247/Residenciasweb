@@ -14,6 +14,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\scripts\seguridad.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\scripts\seguridad.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\scripts\seguridad.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="wwwroot\img\comprobado.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -37,40 +37,48 @@ var errores = erroresLabel;
 //    location.href = "/login";
 //}
 
-btniniciar.addEventListener("click", async function (event) {
-    event.preventDefault();
-    
-        let json = {
-            Contrasena: contrasena.value,
-            Numcontrol: numerodecontrol.value
-        };
+//btniniciar.addEventListener("click", async function (event) {
+//    event.preventDefault();
 
-        let response = await fetch("https://localhost:7137/api/IniciarSesion", {
-            method: 'POST',
-            body: JSON.stringify(json),
-            headers: {
-                "content-type": "application/json"
-            }
-        });
+//        let json = {
+//            Contrasena: contrasena.value,
+//            Numcontrol: numerodecontrol.value
+//        };
 
-        if (response.ok) {
-            var token = await response.text();
-            sessionStorage.jwt = token;
-            let credencial = new PasswordCredential({
-                id: numerodecontrol.value,
-                password: contrasena.value,
-                username: numerodecontrol.value
-            });
-            await navigator.credentials.store(credencial);
-            window.location.href = "/login/Tareas";
-        } else {
-            console.error('Error en la respuesta:', response.status, response.statusText);
-        }
+//        let response = await fetch("https://localhost:7137/api/IniciarSesion", {
+//            method: 'POST',
+//            body: JSON.stringify(json),
+//            headers: {
+//                "content-type": "application/json"
+//            }
+//        });
 
-});
+//        if (response.ok) {
+//            var token = await response.text();
+//            sessionStorage.jwt = token;
+//            let credencial = new PasswordCredential({
+//                id: numerodecontrol.value,
+//                password: contrasena.value,
+//                username: numerodecontrol.value
+//            });
+//            await navigator.credentials.store(credencial);
+//            window.location.href = "/login/Tareas";
+//        } else {
+//            console.error('Error en la respuesta:', response.status, response.statusText);
+//        }
+
+//});
 
 
 ////
+btniniciar.addEventListener("click", async function (event) {
+    event.preventDefault();
+    // Validación
+
+    await fetchToken(numerodecontrol.value, contrasena.value)
+      
+ 
+});
 document.addEventListener("DOMContentLoaded", function () {
 
 

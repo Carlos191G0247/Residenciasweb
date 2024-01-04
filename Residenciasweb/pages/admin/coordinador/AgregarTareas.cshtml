@@ -4,47 +4,81 @@
 }
 <html>
 <head>
+    <link href="~/styles/agregartareas.css" rel="stylesheet" />
     <title></title>
 </head>
 
 <body>
 
-    <div>
+
+    <header>
+        <nav>
+            <img src="~/img/logo.png" />
+        </nav>
+    </header>
+
+
+
+    <div class="contenedorPrincipal">
         <form>
+
             <nav>
                 <h2>Añadir Tarea</h2>
             </nav>
 
-            <label>Nombre de la tarea</label>
-            <input name="nomtarea" type="text" />
+            <div class="contenedor">
 
-            <label>Fecha de terminacion</label>
-            <input name="fechater" type="datetime-local" />
+                <div class="input-box">
+                    <label>Nombre de la tarea</label>
+                    <input name="nomtarea" type="text" />
+                </div>
 
-            <label>Numero de Tarea:</label>
-            <select name="numTareas">
-                <option value="1">Nombretarea</option>
-                <option value="2">Nombretarea</option>
-                <option value="3">Nombretarea</option>
-                <option value="4">Nombretarea</option>
-                <option value="5">Nombretarea</option>
-                <option value="6">Nombretarea</option>
-                <option value="7">Nombretarea</option>
-                <option value="8">Nombretarea</option>
-                <option value="9">Nombretarea</option>
-                <option value="10">Nombretarea</option>
+                <div class="input-box">
+                    <label>Fecha de terminacion</label>
+                    <input name="fechater" type="datetime-local" />
+                </div>
 
-            </select>
+                <div class="input-box">
+                    <label>Numero de Tarea:</label>
+                    <select name="numTareas">
+                        <option value="1">Nombretarea</option>
+                        <option value="2">Nombretarea</option>
+                        <option value="3">Nombretarea</option>
+                        <option value="4">Nombretarea</option>
+                        <option value="5">Nombretarea</option>
+                        <option value="6">Nombretarea</option>
+                        <option value="7">Nombretarea</option>
+                        <option value="8">Nombretarea</option>
+                        <option value="9">Nombretarea</option>
+                        <option value="10">Nombretarea</option>
 
-            <input type="file" name="archivoPdf" id="inputPdf" class="btnadjuntar" accept=".pdf" />
+                    </select>
+                </div>
 
-            <textarea name="instruccion"></textarea>
+                <div class="input-box">
+                    <label>Archivo</label>
+                    <input type="file" name="archivoPdf" id="inputPdf" class="btnadjuntar" accept=".pdf" />
+                </div>
 
 
-            <label class="errores"></label>
 
-            <input type="button" value="cancelar" />
-            <input id="enviarbBtn" type="submit" value="Agregar" />
+                <textarea name="instruccion"></textarea>
+
+
+
+
+            </div>
+
+
+            <div class="boton">
+
+
+                <input type="button" value="cancelar" />
+                <input id="enviarbBtn" type="submit" value="Agregar" />
+
+
+            </div>
+            <label class="errores">ocurrio un error </label>
 
         </form>
     </div>

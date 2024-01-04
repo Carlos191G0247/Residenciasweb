@@ -211,8 +211,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var cerrarsesion = document.getElementById("cerrarsesion");
 
 
-    cerrarsesion.addEventListener('click', function () {
-        window.location.replace("https://localhost:7113/login/index");
+    cerrarsesion.addEventListener('click', async function () {
+        await logout();
 
     });
 
@@ -293,6 +293,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
     var estatus = document.getElementById("estatus");
+    var ocultar = document.querySelector('.derecha');
+    var elementosDerecha = document.querySelectorAll('.derecha *:not(#enviarBtn)');
+
     async function Traerestatus() {
 
         
@@ -310,16 +313,30 @@ document.addEventListener('DOMContentLoaded', function () {
             estatus.textContent = datos2;
             if (datos2 == "Enviado") {
                 enviarBtn.value = "Cancelar";
+                formulario.style.backgroundColor = 'rgba(0,0,0,.3)'; 
+                elementosDerecha.forEach(function (elemento) {
+                    elemento.disabled = true;
+                });
+
             }
             if (datos2 == "Entregado Tarde") {
                 enviarBtn.value = "Cancelar";
+                formulario.style.backgroundColor = 'rgba(0,0,0,.3)'; 
 
+                elementosDerecha.forEach(function (elemento) {
+                    elemento.disabled = true;
+                });
             }
         }
         else {
             let error = await response2.text();
             estatus.textContent = error;
             enviarBtn.value = "Enviar";
+            formulario.style.backgroundColor = '#FFFFFF';
+
+            elementosDerecha.forEach(function (elemento) {
+                elemento.disabled = false;
+            });
         }
     }
 

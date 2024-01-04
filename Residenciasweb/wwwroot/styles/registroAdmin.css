@@ -32,13 +32,12 @@ header {
 
     .container form {
         max-width: 800px;
-        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        box-shadow: 0 15px 20px rgba(0,0,0,0.6);
         padding: 20px;
         display: flex;
         flex-direction: column;
         width: 60%;
         height: auto;
-        background: #F4F4F2;
         margin: auto;
     }
 
@@ -63,19 +62,48 @@ header {
 div h2 {
     text-transform: uppercase;
     font-family: fuente;
+    padding-bottom: 8px;
+    border-bottom: 1px solid silver;
+    font-family: fuente;
 }
 
-.input-box input {
+.input-box {
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    padding-bottom: 15px;
+    /*
     height: 21px;
     margin: 27px 0;
-    padding: 0 30px;
+    padding: 0 30px;*/
 }
 
+    .input-box:nth-child(2n) {
+        justify-content: center;
+    }
+
+    .input-box label {
+        width: 95%;
+        font-weight: bold;
+        margin: 5px 0;
+    }
+
+    .input-box input, select {
+        height: 40px;
+        width: 95%;
+        padding: 0 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        background-color: #ebebeb;
+        outline: none;
+    }
+
+/*
 select {
     margin: 8px 0;
     padding: 0 70px;
     border: none;
-}
+}*/
 
 
 
@@ -97,7 +125,7 @@ select {
         font-weight: bold;
     }
 
-.datetime input[type=datetime-local] {
+.input-box input[type=datetime-local] {
     color: black;
     background: #c8c0c0 url(../img/calendario.png);
     background-size: 30px;
@@ -109,7 +137,7 @@ select {
     font-family: fuente;
 }
 
-    .datetime input[type=datetime-local]::-webkit-calendar-picker-indicator {
+    .input-box input[type=datetime-local]::-webkit-calendar-picker-indicator {
         opacity: 0;
     }
 
@@ -122,7 +150,7 @@ select {
     .fields {
         display: flex;
         flex-direction: column;
-        width: 100%;
+        width: 200%;
         align-items: start;
     }
 

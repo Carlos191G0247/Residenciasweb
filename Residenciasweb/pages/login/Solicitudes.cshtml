@@ -15,11 +15,11 @@
         </nav>
 
         <nav>
-            <p>RESIDENCIAS PROFESIONALES</p>
+            <p id="Nombreadmin">RESIDENCIAS PROFESIONALES</p>
         </nav>
 
         <nav>
-            <img class="imgU" src="~/img/usuario.png" />
+            <img id="cerrarsesion" class="imgU" src="~/img/usuario.png" />
         </nav>
 
     </header>
@@ -30,15 +30,33 @@
 
             <div class="Boton2">
                 <label>Fecha:</label>
-                <select>
-                    <option>opcion1</option>
-                    <option>opcion2</option>
-                    <option>opcion3</option>
-                    <option>opcion4</option>
-                    <option>opcion5</option>
-                    <option>opcion6</option>
-                </select>
+                <select id="traerfecha"></select>
 
+            </div>
+            <div>
+                <label>Entregadas</label>
+                <input type="checkbox"  />
+                <label>No Entregadas</label>
+                <input type="checkbox"  />
+            </div>
+            <div>
+                <label>Numero de Tarea:</label>
+                <select >
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+               
+                </select>
+            </div>
+            <div class="Boton4">
+                <input type="button" value="Tareas" />
             </div>
             <div class="Boton4">
                 <input type="button" value="Registro" />
@@ -95,7 +113,7 @@
     </div>
 
 
-
+    <script src="~/scripts/seguridad.js"></script>
     <script src="~/scripts/solicitudes.js"></script>
 
 
