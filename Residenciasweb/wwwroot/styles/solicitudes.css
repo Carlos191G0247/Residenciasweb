@@ -134,7 +134,13 @@ header {
     }
 
 
-    .alumnos .icono {
+    .alumnos .icono  {
+        position: absolute;
+        right: 12px;
+        transform: translateY(-50%);
+        margin-top: 0.5%;
+    }
+    .alumnos .icono1 {
         position: absolute;
         right: 12px;
         transform: translateY(-50%);

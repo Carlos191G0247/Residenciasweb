@@ -1,22 +1,28 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
     // Obtén referencias a los elementos del formulario
     const formulario = document.querySelector('form');
+   
 
     // Agrega un event listener al formulario para manejar el envío
     formulario.addEventListener('submit', async function (event) {
         event.preventDefault(); // Evita el comportamiento predeterminado del formulario
         let form = event.target.closest('form');;
         const erroresLabel = document.querySelector('.errores');
-        var errores = erroresLabel;
+        const errores = erroresLabel; 
         const contrasena = form.elements.contraseña.value;
         const confirmarContrasena = form.elements.confirmarContraseña.value;
 
-        // Verifica si las contraseñas coinciden
         if (contrasena !== confirmarContrasena) {
-            // Muestra un mensaje de error o realiza alguna acción
             errores.textContent = "Las contraseñas no coinciden";
-            return; // Evita continuar con el envío del formulario
+            return;
         }
+        const camposNoVacios = Array.from(form.elements).filter(element => element.name !== '' && element.value.trim() === '').length === 0;
+
+        if (!camposNoVacios) {
+            errores.textContent = "Todos los campos con atributo 'name' son requeridos";
+            return;
+        }
+        
         let json = {
             NombreCompleto: form.elements.nombre.value,
             NumControl: form.elements.numcontrol.value,
@@ -28,7 +34,7 @@
 
         try {
             // Realiza la petición POST usando fetch y espera la respuesta
-            const response = await fetch("https://apiresidenciaswebca.sistemas19.com/api/Residente", {
+            const response = await fetch("https://localhost:7137/api/Residente", {
                 method: 'POST',
                 body: JSON.stringify(json),
                 headers: {
@@ -36,18 +42,19 @@
                 },
             });
 
-            if (!response.ok) {
-                throw new Error('Hubo un problema con la solicitud.');
+            if (response.ok) {
+                errores.textContent = "";
+                form.reset();
+                
             }
             else {
+                let respuesta = await response.text();
+                errores.textContent = respuesta;
+
 
             }
 
-            // Espera la conversión de la respuesta a formato JSON
-            const data = await response.json();
-
-            // Maneja la respuesta exitosa aquí (si es necesario)
-            console.log('Respuesta exitosa:', data);
+         
         } catch (error) {
             // Maneja los errores aquí
             console.error('Error en la solicitud:', error);
