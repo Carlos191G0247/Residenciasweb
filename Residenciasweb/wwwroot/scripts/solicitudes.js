@@ -53,7 +53,6 @@ async function TraerNombre() {
 
 let listaAlumnos = document.querySelector('.alumnos ul');
 
-/*/${checkbox1.checked}*/
 async function Filtro() {
     
     let response = await fetch(`https://localhost:7137/api/Residente/Filtro/${traerfecha.value}/${checkbox1.checked}/${checkbox2.checked}/${numtarea.value}`, {
@@ -143,14 +142,11 @@ async function MostrarTareaSubida(idres, numtarea) {
     }
 }
 listaAlumnos.addEventListener('click', async function (event) {
-    // Verifica si el clic ocurrió en un elemento <a> dentro de un <li>
     let clickedLink = event.target.closest('li a');
 
     if (clickedLink) {
-        // Evita la propagación del evento a elementos más externos
         event.stopPropagation();
 
-        // Obtén el dataset-id del <li>
         let elementoLi = clickedLink.closest('li');
         let elementoId = elementoLi.dataset.id;
 
@@ -163,6 +159,7 @@ listaAlumnos.addEventListener('click', async function (event) {
             let confirmacion = window.confirm("¿Desea Regresar la tarea?" );
             if (confirmacion) {
                 await RegresarEstado(numtarea.value, elementoId);
+                await Filtro();
              
 
             } else {
@@ -170,9 +167,7 @@ listaAlumnos.addEventListener('click', async function (event) {
             }
             
         }
-        // Construye la URL con el ID y realiza la redirección
-        //const url = `https://ejemplo.com/miPagina/${elementoId}`;
-        //window.location.href = url;
+
     }
 });
 
@@ -191,39 +186,11 @@ async function iniciar() {
     await Filtro();
 }
 
-// Luego, llama a la función iniciar
+
 iniciar();
 document.body.addEventListener("change", async function (event) {
         await Filtro();
     
 });
 
-//document.body.addEventListener("click", function (e) {
-//    if (e.target.tagName === "INPUT") {
-        
 
-//        if (e.target.value === "Solicitudes") {
-//            divSolicitudes.style.display = "flex";
-//            divVerListacarrera.style.display = "none";
-//            divSolicitude.style.display = "none";
-//        } else if (e.target.value === "Tareas") {
-
-//            divSolicitude.style.display = "none";
-//            divSolicitudes.style.display = "none";
-//            divVerListacarrera.style.display = "flex";
-//        } else if (e.target.value === "Registro") {
-//            window.location.href = "/Registro/RegistroAlumno";
-//        }
-
-        
-
-//    }
-
-//    if (e.target.tagName === "LI") {
-        
-//            divSolicitude.style.display = "flex";
-//            divSolicitudes.style.display = "none";
-//            divVerListacarrera.style.display = "none";
- 
-//    }
-//});
