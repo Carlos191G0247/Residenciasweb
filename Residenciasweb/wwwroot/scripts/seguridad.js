@@ -24,11 +24,24 @@ async function logout() {
     location.href = "/login/index";
 }
 
-async function fetchToken (username,password) {
+async function fetchToken(username, password) {
 
+    let rol;
+    if (username.length === 5) {
+        rol = "Admin";
+    }
+    else if (username.length ==4) {
+        rol = "Telma";
+    }
+    else {
+        rol = "Residente";
+    }
+    
+  
     let json = {
         Contrasena: password,
-        Numcontrol: username
+        Numcontrol: username,
+        Rol: rol
     };
 
     let response = await fetch("https://localhost:7137/api/IniciarSesion", {
@@ -40,6 +53,8 @@ async function fetchToken (username,password) {
     });
 
     if (response.ok) {
+
+       
         var token = await response.text();
         sessionStorage.jwt = token;
         let credencial = new PasswordCredential({
@@ -48,7 +63,13 @@ async function fetchToken (username,password) {
             username: username
         });
         await navigator.credentials.store(credencial);
-        window.location.href = "/login/Solicitudes";
+        if (rol == "Admin") {
+            window.location.href = "/login/Solicitudes";
+        }
+        else if (rol == "Residente") {
+            window.location.href = "/login/Tareas";
+        }
+        
     } else {
         console.error('Error en la respuesta:', response.status, response.statusText);
     }

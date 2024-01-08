@@ -2,7 +2,10 @@
 var nombreCordi = document.getElementById('nombrecordi');
 var cerrarsesion = document.getElementById('cerrarsesion');
 var boton = document.getElementById('miBoton');
-
+const regresar = document.getElementById('miBotonRe');
+regresar.addEventListener('click', async function () {
+    window.location.replace('https://localhost:7136/login/solicitudes');
+});
 boton.addEventListener('click' ,async function () {
     location.href = '/admin/coordinador/AgregarTareas';
 

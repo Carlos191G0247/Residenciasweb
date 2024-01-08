@@ -160,7 +160,15 @@ listaAlumnos.addEventListener('click', async function (event) {
             window.open(ruta, '_blank');
         }
         else {
-            await RegresarEstado(numtarea.value, elementoId);
+            let confirmacion = window.confirm("¿Desea Regresar la tarea?" );
+            if (confirmacion) {
+                await RegresarEstado(numtarea.value, elementoId);
+             
+
+            } else {
+                console.log("Usuario seleccionó 'No', no se realizará la edición");
+            }
+            
         }
         // Construye la URL con el ID y realiza la redirección
         //const url = `https://ejemplo.com/miPagina/${elementoId}`;
@@ -177,9 +185,14 @@ vertareasasignadas.addEventListener('click', async function () {
     window.location.href = "/admin/coordinador/verTareasAsignadas";
 });
 
-TraerNombre();
-TraerFechas();
+async function iniciar() {
+    await TraerNombre();
+    await TraerFechas();
+    await Filtro();
+}
 
+// Luego, llama a la función iniciar
+iniciar();
 document.body.addEventListener("change", async function (event) {
         await Filtro();
     

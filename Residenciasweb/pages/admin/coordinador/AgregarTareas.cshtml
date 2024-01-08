@@ -30,27 +30,27 @@
 
                 <div class="input-box">
                     <label>Nombre de la tarea</label>
-                    <input name="nomtarea" type="text" />
+                    <input name="nomtarea" type="text" required title="Por favor, selecciona una fecha de terminación." />
                 </div>
 
                 <div class="input-box">
                     <label>Fecha de terminacion</label>
-                    <input name="fechater" type="datetime-local" />
+                    <input name="fechater" type="datetime-local" required title="Por favor, selecciona una fecha de terminación." />
                 </div>
 
                 <div class="input-box">
                     <label>Numero de Tarea:</label>
                     <select name="numTareas">
-                        <option value="1">Nombretarea</option>
-                        <option value="2">Nombretarea</option>
-                        <option value="3">Nombretarea</option>
-                        <option value="4">Nombretarea</option>
-                        <option value="5">Nombretarea</option>
-                        <option value="6">Nombretarea</option>
-                        <option value="7">Nombretarea</option>
-                        <option value="8">Nombretarea</option>
-                        <option value="9">Nombretarea</option>
-                        <option value="10">Nombretarea</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
 
                     </select>
                 </div>
@@ -62,7 +62,7 @@
 
 
 
-                <textarea name="instruccion"></textarea>
+                <textarea name="instruccion" required title="Por favor, selecciona una fecha de terminación."></textarea>
 
 
 
@@ -73,12 +73,12 @@
             <div class="boton">
 
 
-                <input type="button" value="cancelar" />
+                <input id="cancelar" type="button" value="cancelar" />
                 <input id="enviarbBtn" type="submit" value="Agregar" />
 
 
             </div>
-            <label class="errores">ocurrio un error </label>
+            <label id="errores" class="errores"></label>
 
         </form>
     </div>
