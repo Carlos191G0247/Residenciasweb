@@ -1,11 +1,9 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
-    // Obtén referencias a los elementos del formulario
     const formulario = document.querySelector('form');
    
 
-    // Agrega un event listener al formulario para manejar el envío
     formulario.addEventListener('submit', async function (event) {
-        event.preventDefault(); // Evita el comportamiento predeterminado del formulario
+        event.preventDefault(); 
         let form = event.target.closest('form');;
         const erroresLabel = document.querySelector('.errores');
         const errores = erroresLabel; 
@@ -19,7 +17,7 @@
         const camposNoVacios = Array.from(form.elements).filter(element => element.name !== '' && element.value.trim() === '').length === 0;
 
         if (!camposNoVacios) {
-            errores.textContent = "Todos los campos con atributo 'name' son requeridos";
+            errores.textContent = "Todos los campos son requeridos";
             return;
         }
         
@@ -33,12 +31,12 @@
         };
 
         try {
-            // Realiza la petición POST usando fetch y espera la respuesta
             const response = await fetch("https://localhost:7137/api/Residente", {
                 method: 'POST',
                 body: JSON.stringify(json),
                 headers: {
                     'Content-Type': 'application/json',
+                    "Authorization": "Bearer " + sessionStorage.jwt
                 },
             });
 
@@ -56,7 +54,6 @@
 
          
         } catch (error) {
-            // Maneja los errores aquí
             console.error('Error en la solicitud:', error);
         }
     });
