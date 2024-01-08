@@ -37,11 +37,12 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
 
-            let response = await fetch("https://localhost:7136/api/AsginarTareas", {
+            let response = await fetch("https://localhost:7137/api/AsginarTareas", {
                 method: 'POST',
                 body: JSON.stringify(json),
                 headers: {
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    "Authorization": "Bearer " + sessionStorage.jwt
                 }
 
             });
@@ -58,15 +59,16 @@ document.addEventListener('DOMContentLoaded', function () {
                         Id: idobj,
                         pdfBase64: pdfBase64.replace("data:application/pdf;base64,", "")
                     }
-                    let response1 = await fetch("https://localhost:7136/api/AsginarTareas/PDF", {
+                    let response1 = await fetch("https://localhost:7137/api/AsginarTareas/PDF", {
                         method: 'POST',
                         body: JSON.stringify(json2),
                         headers: {
                             "content-type": "application/json"
                         }
                     })
-
+                    window.location.replace('https://localhost:7136/admin/coordinador/verTareasAsignadas');
                 }
+
                 else {
 
                 }

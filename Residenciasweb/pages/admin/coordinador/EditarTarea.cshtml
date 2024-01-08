@@ -1,0 +1,88 @@
+﻿@page
+@model Residenciasweb.pages.admin.coordinador.EditarTareaModel
+@{
+}
+<html>
+<head>
+    <link href="~/styles/agregartareas.css" rel="stylesheet" />
+    <title></title>
+</head>
+
+<body>
+
+
+    <header>
+        <nav>
+            <img src="~/img/logo.png" />
+        </nav>
+    </header>
+
+
+
+    <div class="contenedorPrincipal">
+        <form>
+
+            <nav>
+                <h2>Editar Tarea</h2>
+            </nav>
+
+            <div class="contenedor">
+
+                <div class="input-box">
+                    <label>Nombre de la tarea</label>
+                    <input id="idnomtarea" name="nomtarea" type="text" />
+                </div>
+
+                <div class="input-box">
+                    <label>Fecha de terminacion</label>
+                    <input id="idfecha" name="fechater" type="datetime-local" />
+                </div>
+
+                <div class="input-box">
+                    <label>Numero de Tarea:</label>
+                    <select id="idnumtareas" name="numTareas">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+
+                    </select>
+                </div>
+
+                <div class="input-box">
+                    <label>Archivo</label>
+                    <input type="file" name="archivoPdf" id="inputPdf" class="btnadjuntar" accept=".pdf" />
+                </div>
+
+
+
+                <textarea id="idinstruccion" name="instruccion"></textarea>
+
+
+
+
+            </div>
+
+
+            <div class="boton">
+
+
+                <input id="cancelar" type="button" value="cancelar" />
+                <input id="editarbBtn" type="submit" value="Editar" />
+
+
+            </div>
+            <label class="errores"> </label>
+
+        </form>
+    </div>
+
+    <script src="~/scripts/editartarea.js"></script>
+</body>
+</html>

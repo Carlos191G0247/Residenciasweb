@@ -84,3 +84,17 @@ ul {
 .Alumnos .tarea {
     right: 10px;
 }
+.boton {
+    position: fixed;
+    bottom: 10px; /* Puedes ajustar la distancia desde la parte inferior según tus preferencias */
+    right: 10px; /* Puedes ajustar la distancia desde la derecha según tus preferencias */
+}
+
+/* Estilos adicionales para el botón si es necesario */
+#miBoton {
+    padding: 10px;
+    background-color: #1B396A;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
