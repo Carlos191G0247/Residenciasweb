@@ -109,7 +109,6 @@ listaTareas.addEventListener('click', async function (event) {
             let confirmacion = window.confirm("¿Desea editar la tarea '" + nombreTarea + "'?");
 
             if (confirmacion) {
-                // Aquí puedes agregar la lógica para la edición
                 location.href = '/admin/coordinador/EditarTarea?id=' + elementoId;
 
             } else {
@@ -123,7 +122,6 @@ listaTareas.addEventListener('click', async function (event) {
             let confirmacion = window.confirm("¿Desea Eliminar la tarea '" + nombreTarea + "'?");
 
             if (confirmacion) {
-                // Aquí puedes agregar la lógica para la edición
                 await EliminarTarea(elementoId);
             } else {
                 console.log("Usuario seleccionó 'No', no se realizará la edición");
