@@ -80,8 +80,8 @@ async function Filtro() {
             listaAlumnos.children[i].innerHTML = `
                     <label class="nombre">${datos[i].nombreCompleto}</label>
                     <label class="NumControl">${datos[i].idIniciarSesionNavigation.numcontrol}</label>
-                    <a id="ver" class="icono"><img src="/img/clip.png" /></a>
-                    <a id="regresar" class="icono1"><img src="/img/usuario.png" /></a>
+                    <a id="ver" class="icono"><img src="/img/busqueda.png" /></a>
+                    <a id="regresar" class="icono1"><img src="/img/regresartarea.png" /></a>
                 `;
             const etiquetasVer = listaAlumnos.querySelectorAll('.icono');
             const etiquetasRegresar = listaAlumnos.querySelectorAll('.icono1');

@@ -20,9 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const reader = new FileReader();
 
             reader.onload = function (e) {
-                // El contenido del archivo en base64 estará disponible en e.target.result
                 const base64Content = e.target.result;
-                // Aquí puedes hacer lo que quieras con el contenido base64, como guardarlo en una variable.
                 pdfBase64 = base64Content;
             };
 

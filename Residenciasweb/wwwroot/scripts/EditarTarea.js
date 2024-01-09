@@ -17,7 +17,7 @@ inputPdf.addEventListener('change', function () {
 
         const lector = new FileReader();
         lector.onload = function (evento) {
-            otropdf = evento.target.result; // Asigna directamente a pdfBase64
+            otropdf = evento.target.result; 
             console.log('PDF en formato base64:', otropdf);
         };
 
@@ -40,8 +40,7 @@ async function TraerDatos() {
         let datos = await response.json();
         console.log(datos);
         nomTareaInput.value = datos.nombreTarea;
-        // Ajusta el formato de la fecha si es necesario
-        fechaInput.value = datos.fecha.replace('T', ' '); // Puedes ajustar esto según tus necesidades
+        fechaInput.value = datos.fecha.replace('T', ' '); 
         numTareasSelect.value = datos.numTarea;
         instruccionTextarea.value = datos.intruccion;
     }
@@ -79,7 +78,6 @@ editarBtn.addEventListener('click', async function (event) {
         window.location.replace('https://localhost:7136/admin/coordinador/verTareasAsignadas');
     }
     else {
-        //let nuevoPdfBase64 = await obtenerBase64DelPdfSeleccionado();
         if (typeof otropdf === 'undefined') {
             let respuesta = await response.text();
             console.log(respuesta);
@@ -92,21 +90,7 @@ editarBtn.addEventListener('click', async function (event) {
 
             window.location.replace('https://localhost:7136/admin/coordinador/verTareasAsignadas');
         }
-        //if (pdfBase64 !== nuevoPdfBase64) {
-        //    await EliminarPDF();
-        //    await AgregarPDF();
-        //    pdfBase64 = null;
-
-        //    window.location.replace('https://localhost:7136/admin/coordinador/verTareasAsignadas');
-
-        //} else {
-        //    let respuesta = await response.text();
-        //    console.log(respuesta);
-        //    errores.textContent = respuesta;
-        //}
-         
-
-
+     
     }
 });
 
@@ -162,7 +146,6 @@ async function obtenerBase64DelPdfSeleccionado() {
             lector.readAsDataURL(archivoSeleccionado);
         });
     } else {
-        // No se seleccionó ningún archivo
         return null;
     }
 }
@@ -183,7 +166,6 @@ async function cargarPDF() {
         if (inputPdf) {
             const lector = new FileReader();
 
-            // Utiliza una Promesa para gestionar la carga del PDF
             const cargarPdfPromise = new Promise((resolve) => {
                 lector.onload = function (evento) {
                     pdfBase64 = evento.target.result;
@@ -192,15 +174,12 @@ async function cargarPDF() {
                 };
             });
 
-            // Lee el archivo PDF y espera a que se complete
             lector.readAsDataURL(file);
             await cargarPdfPromise;
 
-            // Crea un objeto DataTransfer y añade el archivo
             const dataTransfer = new DataTransfer();
             dataTransfer.items.add(file);
 
-            // Asigna el objeto DataTransfer al campo de entrada de archivo
             inputPdf.files = dataTransfer.files;
         } else {
             console.error('Elemento inputPdf no encontrado.');

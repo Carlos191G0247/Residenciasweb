@@ -67,17 +67,18 @@ div input {
     justify-content: center;
 }
 
-div button {
-    display: flex;
-    justify-content: center;
-    background-color: #1B396A;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin: 10px auto;
-    font-weight: bold;
-}
+    div input[type ="submit"] {
+        font-family:Arial;
+        display: flex;
+        justify-content: center;
+        background-color: #1B396A;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin: 10px auto;
+        font-weight: bold;
+    }
 
 div a {
     color: #1B396A;
