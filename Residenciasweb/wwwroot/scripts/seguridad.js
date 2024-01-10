@@ -69,6 +69,10 @@ async function fetchToken(username, password) {
         else if (rol == "Residente") {
             window.location.href = "/login/Tareas";
         }
+        else if (rol == "Telma") {
+
+            window.location.href = "/admin/departamento/ControlEscolar";
+        }
         
     } else {
         console.error('Error en la respuesta:', response.status, response.statusText);
