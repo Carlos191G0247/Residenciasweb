@@ -76,7 +76,12 @@ async function Filtro() {
         }
 
         for (let i = 0; i < datos.length; i++) {
+            const estatusArchivos = datos[i].archivosenviados && datos[i].archivosenviados.length > 0
+                ? datos[i].archivosenviados[0].estatus
+                : null;
+
             listaAlumnos.children[i].dataset.id = datos[i].id;
+            listaAlumnos.children[i].dataset.estatus = estatusArchivos; 
             listaAlumnos.children[i].innerHTML = `
                     <label class="nombre">${datos[i].nombreCompleto}</label>
                     <label class="NumControl">${datos[i].idIniciarSesionNavigation.numcontrol}</label>
@@ -103,6 +108,7 @@ async function Filtro() {
                     etiqueta.style.display = 'flex';
                 });
             }
+          
 
 
         }
