@@ -167,6 +167,10 @@ document.addEventListener("DOMContentLoaded", function () {
   
    
 });
-
-
+async function iniciar() {
+    await obtenerUltimaPagina();
+    await checkAndRedirectToHome();
+    
+}
+iniciar();
 
