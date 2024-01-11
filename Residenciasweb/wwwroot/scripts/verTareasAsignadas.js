@@ -20,7 +20,7 @@ async function logout() {
     location.href = "/login/index";
 }
 async function TraerNombre() {
-    let response = await fetch('https://localhost:7137/api/Coordinadores/CordiNom', {
+    let response = await fetch('https://apiresidenciaswebca.sistemas19.com/api/Coordinadores/CordiNom', {
         method: 'GET',
         headers: {
             "Authorization": "Bearer " + sessionStorage.jwt
@@ -38,7 +38,7 @@ async function TraerNombre() {
 
 let listaTareas = document.querySelector('.Alumnos ul');
 async function TraerTareas() {
-    let response = await fetch('https://localhost:7137/api/AsginarTareas', {
+    let response = await fetch('https://apiresidenciaswebca.sistemas19.com/api/AsginarTareas', {
         method: 'GET',
         headers: {
             "Authorization": "Bearer " + sessionStorage.jwt
@@ -75,7 +75,7 @@ async function TraerTareas() {
 var ruta;
 async function MostrarTarea(numtarea) {
     ruta = null;
-    let response = await fetch(`https://localhost:7137/api/AsginarTareas/${numtarea}`, {
+    let response = await fetch(`https://apiresidenciaswebca.sistemas19.com/api/AsginarTareas/${numtarea}`, {
         method: 'GET',
         headers: {
             "Authorization": "Bearer " + sessionStorage.jwt
@@ -84,7 +84,7 @@ async function MostrarTarea(numtarea) {
     });
     if (response.ok) {
         let id = await response.text();
-        ruta = `https://localhost:7137/tareasasignadas/${numtarea + ".pdf"}`;
+        ruta = `https://apiresidenciaswebca.sistemas19.com/tareasasignadas/${numtarea + ".pdf"}`;
 
     }
 }
@@ -131,7 +131,7 @@ listaTareas.addEventListener('click', async function (event) {
     }
 });
 async function EliminarTarea(numtarea) {
-    let response = await fetch(`https://localhost:7137/api/AsginarTareas/${numtarea}`, {
+    let response = await fetch(`https://apiresidenciaswebca.sistemas19.com/api/AsginarTareas/${numtarea}`, {
         method: 'DELETE',
         headers: {
             "Authorization": "Bearer " + sessionStorage.jwt

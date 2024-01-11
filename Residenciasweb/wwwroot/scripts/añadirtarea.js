@@ -4,7 +4,7 @@ const cancelar = document.getElementById('cancelar');
 
 cancelar.addEventListener('click', async function () {
 
-    window.location.replace('https://localhost:7136/admin/coordinador/verTareasAsignadas');
+    window.location.replace('https://residencias.sistemas19.com/admin/coordinador/verTareasAsignadas');
 });
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
 
-            let response = await fetch("https://localhost:7137/api/AsginarTareas", {
+            let response = await fetch("https://apiresidenciaswebca.sistemas19.com/api/AsginarTareas", {
                 method: 'POST',
                 body: JSON.stringify(json),
                 headers: {
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         Id: idobj,
                         pdfBase64: pdfBase64.replace("data:application/pdf;base64,", "")
                     }
-                    let response1 = await fetch("https://localhost:7137/api/AsginarTareas/PDF", {
+                    let response1 = await fetch("https://apiresidenciaswebca.sistemas19.com/api/AsginarTareas/PDF", {
                         method: 'POST',
                         body: JSON.stringify(json2),
                         headers: {
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             "Authorization": "Bearer " + sessionStorage.jwt
                         }
                     })
-                    window.location.replace('https://localhost:7136/admin/coordinador/verTareasAsignadas');
+                    window.location.replace('https://residencias.sistemas19.com/admin/coordinador/verTareasAsignadas');
                 }
 
                 else {

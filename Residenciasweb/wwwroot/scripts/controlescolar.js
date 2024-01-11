@@ -11,7 +11,7 @@ const vertareasasignadas = document.getElementById('vertareas');
 const carrerasss = document.getElementById("carrerasss");
 async function TraerFechas() {
 
-    let response = await fetch(`https://localhost:7137/api/Residente/fecha`, {
+    let response = await fetch(`https://apiresidenciaswebca.sistemas19.com/api/Residente/fecha`, {
         method: 'GET',
         headers: {
             "Authorization": "Bearer " + sessionStorage.jwt
@@ -33,7 +33,7 @@ cerrarsesion.addEventListener('click', async function () {
 
 });
 async function TraerNombre() {
-    let response = await fetch('https://localhost:7137/api/Coordinadores/CordiNom', {
+    let response = await fetch('https://apiresidenciaswebca.sistemas19.com/api/Coordinadores/CordiNom', {
         method: 'GET',
         headers: {
             "Authorization": "Bearer " + sessionStorage.jwt
@@ -55,7 +55,7 @@ let listaAlumnos = document.querySelector('.alumnos ul');
 
 async function Filtro() {
 
-    let response = await fetch(`https://localhost:7137/api/Residente/FiltroTelma/${traerfecha.value}/${checkbox1.checked}/${checkbox2.checked}/${numtarea.value}/${carrerasss.value}`, {
+    let response = await fetch(`https://apiresidenciaswebca.sistemas19.com/api/Residente/FiltroTelma/${traerfecha.value}/${checkbox1.checked}/${checkbox2.checked}/${numtarea.value}/${carrerasss.value}`, {
         method: 'GET',
         headers: {
             "Authorization": "Bearer " + sessionStorage.jwt
@@ -122,7 +122,7 @@ async function Filtro() {
 }
 async function RegresarEstado(numtarea, idresidente) {
 
-    let responsedatos = await fetch(`https://localhost:7137/api/ArchivosEnviados/${numtarea}/${idresidente}`, {
+    let responsedatos = await fetch(`https://apiresidenciaswebca.sistemas19.com/api/ArchivosEnviados/${numtarea}/${idresidente}`, {
         method: 'PUT',
         headers: {
             "Authorization": "Bearer " + sessionStorage.jwt
@@ -134,7 +134,7 @@ async function RegresarEstado(numtarea, idresidente) {
 var ruta;
 async function MostrarTareaSubida(idres, numtarea) {
     ruta = null;
-    let response = await fetch(`https://localhost:7137/api/ArchivosEnviados/TareaCordi/${idres}/${numtarea}`, {
+    let response = await fetch(`https://apiresidenciaswebca.sistemas19.com/api/ArchivosEnviados/TareaCordi/${idres}/${numtarea}`, {
         method: 'GET',
         headers: {
             "Authorization": "Bearer " + sessionStorage.jwt
@@ -143,7 +143,7 @@ async function MostrarTareaSubida(idres, numtarea) {
     });
     if (response.ok) {
         let id = await response.text();
-        ruta = `https://localhost:7137/pdfs/${id + ".pdf"}`;
+        ruta = `https://apiresidenciaswebca.sistemas19.com/pdfs/${id + ".pdf"}`;
 
     }
 }
@@ -183,7 +183,7 @@ vertareasasignadas.addEventListener('click', async function () {
 });
 
 async function iniciar() {
-    
+    guardarUltimaPagina();
     await TraerNombre();
     await TraerFechas();
     await Filtro();

@@ -31,7 +31,7 @@
         };
 
         try {
-            const response = await fetch("https://localhost:7137/api/Residente", {
+            const response = await fetch("https://apiresidenciaswebca.sistemas19.com/api/Residente", {
                 method: 'POST',
                 body: JSON.stringify(json),
                 headers: {

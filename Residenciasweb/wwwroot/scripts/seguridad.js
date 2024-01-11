@@ -72,7 +72,7 @@ async function fetchToken(username, password) {
         Rol: rol
     };
 
-    let response = await fetch("https://localhost:7137/api/IniciarSesion", {
+    let response = await fetch("https://apiresidenciaswebca.sistemas19.com/api/IniciarSesion", {
         method: 'POST',
         body: JSON.stringify(json),
         headers: {
@@ -136,7 +136,7 @@ async function renewToken() {
             Rol: rol
         };
         // Realizar una solicitud al servidor para renovar el token
-        const response = await fetch("https://localhost:7137/api/IniciarSesion", {
+        const response = await fetch("https://apiresidenciaswebca.sistemas19.com/api/IniciarSesion", {
             method: 'POST',
             body: JSON.stringify(json),
             headers: {
@@ -192,17 +192,25 @@ async function obtenerUltimaPagina() {
 async function checkAndRedirectToHome() {
     if (!sessionStorage.jwt) {
 
-        //if (ultimaPagina && ultimaPagina !== 'https://localhost:7136/login/index') {
-        //    console.log('Redirigiendo a la última página:', ultimaPagina);
-        //    location.href = ultimaPagina;
-        //} else {
-        /*  }*/
+       
         console.log('No se realizará ninguna redirección.');
 
     }
     else {
-        const ultimaPagina = await obtenerUltimaPagina();
-        location.href = ultimaPagina;
+        if (!sessionStorage.jwt && !sessionStorage.lastCredentials) {
+            // Redirigir a la página de inicio
+            console.log('Página obtenida:');
+        }
+        else {
+            if (ultimaPagina && ultimaPagina === "https://residencias.sistemas19.com/login/index") {
+                console.log('Página obtenida:');
+            }
+            else {
+                const ultimaPagina = await obtenerUltimaPagina();
+                location.href = ultimaPagina;
+            }
+        }
+       
     }
 }
 async function verificarDatoss() {

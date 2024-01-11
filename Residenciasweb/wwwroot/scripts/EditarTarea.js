@@ -29,7 +29,7 @@ inputPdf.addEventListener('change', function () {
 async function TraerDatos() {
     
 
-    let response = await fetch(`https://localhost:7137/api/AsginarTareas/${idFromUrl}`, {
+    let response = await fetch(`https://apiresidenciaswebca.sistemas19.com/api/AsginarTareas/${idFromUrl}`, {
         method: 'GET',
         headers: {
             "Authorization": "Bearer " + sessionStorage.jwt
@@ -61,7 +61,7 @@ editarBtn.addEventListener('click', async function (event) {
         NumTarea: numTareasSelect.value
 
     };
-    let response = await fetch(`https://localhost:7137/api/AsginarTareas/${idFromUrl}`, {
+    let response = await fetch(`https://apiresidenciaswebca.sistemas19.com/api/AsginarTareas/${idFromUrl}`, {
         method: 'PUT',
         body: JSON.stringify(json),
         headers: {
@@ -75,7 +75,7 @@ editarBtn.addEventListener('click', async function (event) {
         await AgregarPDF();
         pdfBase64= null;
 
-        window.location.replace('https://localhost:7136/admin/coordinador/verTareasAsignadas');
+        window.location.replace('https://residencias.sistemas19.com/admin/coordinador/verTareasAsignadas');
     }
     else {
         if (typeof otropdf === 'undefined') {
@@ -88,7 +88,7 @@ editarBtn.addEventListener('click', async function (event) {
             await AgregarPDF();
             pdfBase64 = null;
 
-            window.location.replace('https://localhost:7136/admin/coordinador/verTareasAsignadas');
+            window.location.replace('https://residencias.sistemas19.com/admin/coordinador/verTareasAsignadas');
         }
      
     }
@@ -104,7 +104,7 @@ async function AgregarPDF() {
         Id: idFromUrl,
         pdfBase64: pdfBase64.replace("data:application/pdf;base64,", "")
     };
-    let response = await fetch(`https://localhost:7137/api/AsginarTareas/PDF`, {
+    let response = await fetch(`https://apiresidenciaswebca.sistemas19.com/api/AsginarTareas/PDF`, {
         method: 'POST',
         body: JSON.stringify(json),
         headers: {
@@ -119,7 +119,7 @@ async function AgregarPDF() {
     }
 }
 async function EliminarPDF() {
-    let response = await fetch(`https://localhost:7137/api/AsginarTareas/EliminarPDF/${idFromUrl}`, {
+    let response = await fetch(`https://apiresidenciaswebca.sistemas19.com/api/AsginarTareas/EliminarPDF/${idFromUrl}`, {
         method: 'DELETE',
         headers: {
             "Authorization": "Bearer " + sessionStorage.jwt,
@@ -150,7 +150,7 @@ async function obtenerBase64DelPdfSeleccionado() {
     }
 }
 async function cargarPDF() {
-    let ruta = `https://localhost:7137/tareasasignadas/${idFromUrl + ".pdf"}`;
+    let ruta = `https://apiresidenciaswebca.sistemas19.com/tareasasignadas/${idFromUrl + ".pdf"}`;
     try {
         let response = await fetch(ruta);
         if (!response.ok) {
@@ -188,5 +188,9 @@ async function cargarPDF() {
         console.error('Error al cargar el PDF:', error);
     }
 }
-TraerDatos();
-cargarPDF();
+
+async function TraerDatossss() {
+    await TraerDatos();
+    await cargarPDF();
+}
+TraerDatossss();

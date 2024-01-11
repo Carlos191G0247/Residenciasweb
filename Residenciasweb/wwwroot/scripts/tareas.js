@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (tareaId !== undefined) {
              
 
-                let response = await fetch(`https://localhost:7137/api/AsginarTareas/${tareaId.substring(5)}`, {
+                let response = await fetch(`https://apiresidenciaswebca.sistemas19.com/api/AsginarTareas/${tareaId.substring(5)}`, {
                     method: 'GET',
                     headers: {
                         "Authorization": "Bearer " + sessionStorage.jwt
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     Estatus: estatustar
                 };
 
-                let response = await fetch("https://localhost:7137/api/ArchivosEnviados", {
+                let response = await fetch("https://apiresidenciaswebca.sistemas19.com/api/ArchivosEnviados", {
                     method: 'POST',
                     body: JSON.stringify(json),
                     headers: {
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             Id: idobj,
                             pdfBase64: pdfBase64.replace("data:application/pdf;base64,", "")
                         };
-                        let response1 = await fetch("https://localhost:7137/api/ArchivosEnviados/PDF", {
+                        let response1 = await fetch("https://apiresidenciaswebca.sistemas19.com/api/ArchivosEnviados/PDF", {
                             method: 'POST',
                             body: JSON.stringify(json),
                             headers: {
@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var ruta;//////////////////////////////////////
     vertareapdf.addEventListener('click', async function () {
-        let responsedatos = await fetch(`https://localhost:7137/api/AsginarTareas/vertarea/${numeroTarea.value}`, {
+        let responsedatos = await fetch(`https://apiresidenciaswebca.sistemas19.com/api/AsginarTareas/vertarea/${numeroTarea.value}`, {
             method: 'GET',
             headers: {
                 "Authorization": "Bearer " + sessionStorage.jwt
@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         if (responsedatos.ok) {
             let idtarea = await responsedatos.text();
-            nuevaRuta = `https://localhost:7137/tareasasignadas/${idtarea + ".pdf"}`;
+            nuevaRuta = `https://apiresidenciaswebca.sistemas19.com/tareasasignadas/${idtarea + ".pdf"}`;
             window.open(nuevaRuta, '_blank');
         }
     
@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function CancelarEstado() {
 
-        let responsedatos = await fetch(`https://localhost:7137/api/ArchivosEnviados/${numeroTarea.value}`, {
+        let responsedatos = await fetch(`https://apiresidenciaswebca.sistemas19.com/api/ArchivosEnviados/${numeroTarea.value}`, {
             method: 'PUT',
             headers: {
                 "Authorization": "Bearer " + sessionStorage.jwt
@@ -274,17 +274,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
     async function EliminarTarea() {
-        let responsedatos = await fetch(`https://localhost:7137/api/ArchivosEnviados/${numeroTarea.value}`, {
+        let responsedatos = await fetch(`https://apiresidenciaswebca.sistemas19.com/api/ArchivosEnviados/${numeroTarea.value}`, {
             method: 'DELETE',
             headers: {
                 "Authorization": "Bearer " + sessionStorage.jwt
             }
 
         });
+        if (responsedatos.ok) {
+            let datos = await responsedatos.text();
+            console.log(datos);
+        }
+        else {
+
+            let datos = await responsedatos.text();
+            console.log(datos);
+
+        }
     }
     async function MostrarTareaSubida() {
         ruta = null;
-        let response = await fetch(`https://localhost:7137/api/ArchivosEnviados/Datos/${numeroTarea.value}`, {
+        let response = await fetch(`https://apiresidenciaswebca.sistemas19.com/api/ArchivosEnviados/Datos/${numeroTarea.value}`, {
             method: 'GET',
             headers: {
                 "Authorization": "Bearer " + sessionStorage.jwt
@@ -295,7 +305,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let datosalumno = await response.json();
 
             mitarea.textContent = datosalumno.nombreArchivo;
-            ruta = `https://localhost:7137/pdfs/${datosalumno.id + ".pdf"}`;
+            ruta = `https://apiresidenciaswebca.sistemas19.com/pdfs/${datosalumno.id + ".pdf"}`;
 
         }
         else {
@@ -305,7 +315,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     async function obtenernombre() {
-        let response2 = await fetch(`https://localhost:7137/api/Residente/nombre`, {
+        let response2 = await fetch(`https://apiresidenciaswebca.sistemas19.com/api/Residente/nombre`, {
             method: 'GET',
             headers: {
                 "Authorization": "Bearer " + sessionStorage.jwt
@@ -330,12 +340,14 @@ document.addEventListener('DOMContentLoaded', function () {
     async function Traerestatus() {
 
         
-        let response2 = await fetch(`https://localhost:7137/api/ArchivosEnviados/${tareaActual.substring(5)}`, {
+        let response2 = await fetch(`https://apiresidenciaswebca.sistemas19.com/api/ArchivosEnviados/${tareaActual.substring(5)}`, {
             method: 'GET',
             headers: {
                 "Authorization": "Bearer " + sessionStorage.jwt
             }
+
         });
+    
 
         if (response2.ok) {
             let datos2 = await response2.text();
@@ -378,7 +390,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     }
-
+    guardarUltimaPagina();
     obtenernombre();
   
 });
