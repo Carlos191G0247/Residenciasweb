@@ -198,7 +198,6 @@ document.addEventListener('DOMContentLoaded', function () {
                                 "Authorization": "Bearer " + sessionStorage.jwt
                             }
                         });
-                       /* await Traerestatus();*/
                     }
 
                     enviarBtn.value = "Cancelar";
@@ -212,7 +211,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
         }
-        //eliminar el pdf
         else {
             await EliminarTarea();
             await Traerestatus();
