@@ -37,6 +37,11 @@ header {
     header .imgU {
         height: 40%;
     }
+.derecha .date {
+    font-size: 15px;
+    text-align: end;
+    margin: 10px;
+}
 
 
 
@@ -45,9 +50,10 @@ header {
 
 
 
-    header img {
-        height: 100%;
-    }
+
+header img {
+    height: 100%;
+}
 
 .contenedor {
     flex: 1;

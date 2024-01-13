@@ -136,7 +136,7 @@ header {
 
     .alumnos .icono  {
         position: absolute;
-        right: 12px;
+        right: -2px;
         transform: translateY(-50%);
         margin-top: 0.5%;
     }
@@ -154,8 +154,7 @@ header {
         margin-top: 0.5%;
     }
     .alumnos ul li[data-estatus="3"] {
-        background-color: #ffcccc; 
-
+        background-color: #6db6fb;
     }
 
 .Check {

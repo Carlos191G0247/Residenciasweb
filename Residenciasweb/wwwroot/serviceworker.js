@@ -36,6 +36,7 @@ self.addEventListener('install', async (event) => {
         })()
     );
 });
+
 async function networkFirst(event) {
     let cache = await caches.open(cacheName);
     try {
@@ -46,7 +47,6 @@ async function networkFirst(event) {
             return response;
         }
     } catch (error) {
-        //console.error('Error durante la solicitud de red:', error);
 
         let resCache = await cache.match(event.request);
 
@@ -58,8 +58,11 @@ async function networkFirst(event) {
     }
 }
 self.addEventListener("fetch", function (event) {
-
-    event.respondWith(networkFirst(event));
+    if (event.request.method !== "GET") {
+        return fetch(event.request);
+    } else {
+        event.respondWith(networkFirst(event));
+    }
 });
 
 

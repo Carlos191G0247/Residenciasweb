@@ -302,11 +302,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
         });
         if (response.ok) {
-            let datosalumno = await response.json();
-
-            mitarea.textContent = datosalumno.nombreArchivo;
-            ruta = `https://apiresidenciaswebca.sistemas19.com/pdfs/${datosalumno.id + ".pdf"}`;
-
+         
+            try {
+                let datosalumno = await response.json();
+                mitarea.textContent = datosalumno.nombreArchivo;
+                ruta = `https://apiresidenciaswebca.sistemas19.com/pdfs/${datosalumno.id + ".pdf"}`;
+            } catch (error) {
+                ruta = null;
+                mitarea.textContent = "";
+            }
         }
         else {
             ruta = null;
@@ -362,7 +366,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
 
             }
-            if (datos2 == "Entregado Tarde") {
+            else if (datos2 == "Entregado Tarde") {
                 enviarBtn.value = "Cancelar";
                 formulario.style.backgroundColor = 'rgba(0,0,0,.3)'; 
 
@@ -370,12 +374,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     elemento.disabled = true;
                 });
             }
-            if (datos2 == "Regresado") {
+            else if (datos2 == "Regresado") {
                 enviarBtn.value = "Cancelar";
                 formulario.style.backgroundColor = 'rgba(0,0,0,.3)';
 
                 elementosDerecha.forEach(function (elemento) {
                     elemento.disabled = true;
+                });
+            }
+            else if (datos2 =="No Entregado") {
+                
+                enviarBtn.value = "Enviar";
+                formulario.style.backgroundColor = '#FFFFFF';
+
+                elementosDerecha.forEach(function (elemento) {
+                    elemento.disabled = false;
                 });
             }
         }

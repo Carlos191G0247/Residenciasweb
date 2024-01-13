@@ -98,3 +98,11 @@ ul {
     border: none;
     cursor: pointer;
 }
+.boton img {
+    height: 30px;
+}
+
+.boton .regresar {
+    border: none;
+    background-color: white;
+}
