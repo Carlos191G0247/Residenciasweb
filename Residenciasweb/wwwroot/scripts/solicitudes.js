@@ -84,9 +84,12 @@ async function Filtro() {
             listaAlumnos.children[i].dataset.estatus = estatusArchivos; 
             listaAlumnos.children[i].innerHTML = `
                     <label class="nombre">${datos[i].nombreCompleto}</label>
-                    <label class="NumControl">${datos[i].idIniciarSesionNavigation.numcontrol}</label>
-                    <a id="ver" class="icono"><img src="/img/usuario.png" /></a>
-                    <a id="regresar" class="icono1"><img src="/img/usuario.png" /></a>
+                    <label class="nombrel">${datos[i].idIniciarSesionNavigation.numcontrol}</label>
+                    <div class"contenedorbotones">
+                          <a id="ver" class="icono" ><img src="/img/busqueda.png" style="height: 20px;" /></a>
+                          <a id="regresar" class="icono1" ><img src="/img/regresartarea.png" style="height: 20px;" /></a>
+                    </div>
+              
                 `;
             const etiquetasVer = listaAlumnos.querySelectorAll('.icono');
             const etiquetasRegresar = listaAlumnos.querySelectorAll('.icono1');
@@ -108,6 +111,8 @@ async function Filtro() {
                     etiqueta.style.display = 'flex';
                 });
             }
+
+           
           
 
 
@@ -134,7 +139,7 @@ async function RegresarEstado(numtarea,idresidente) {
 var ruta;
 async function MostrarTareaSubida(idres, numtarea) {
     ruta = null;
-    let response = await fetch(`https://apiresidenciaswebca.sistemas19.com/ArchivosEnviados/TareaCordi/${idres}/${numtarea}`, {
+    let response = await fetch(`https://apiresidenciaswebca.sistemas19.com/api/ArchivosEnviados/TareaCordi/${idres}/${numtarea}`, {
         method: 'GET',
         headers: {
             "Authorization": "Bearer " + sessionStorage.jwt

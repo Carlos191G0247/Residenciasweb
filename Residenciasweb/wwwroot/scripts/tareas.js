@@ -403,8 +403,14 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     }
-    guardarUltimaPagina();
-    obtenernombre();
+    
+    async function CargaDATOSS() {
+        await guardarUltimaPagina();
+        await obtenernombre();
+      
+    }
+
+    CargaDATOSS();
   
 });
 

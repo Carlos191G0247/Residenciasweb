@@ -125,37 +125,24 @@ header {
             display: flex;
             background: rgba(255,255,255,.3);
             background-color: #E4E4E4;
+            justify-content:space-between;
             padding: 20px 20px;
             margin: 5px 10px;
         }
 
-    .alumnos img {
-        width: 45%;
-    }
+.contenedorbotones a img{
+  width:20px;
+  height:20px;
+}
 
+solicitudes.css
 
-    .alumnos .icono  {
-        position: absolute;
-        right: -2px;
-        transform: translateY(-50%);
-        margin-top: 0.5%;
-    }
-    .alumnos .icono1 {
-        position: absolute;
-        right: 12px;
-        transform: translateY(-50%);
-        margin-top: 0.5%;
-    }
-
-    .alumnos .NumControl {
-        position: absolute;
-        right: 130px;
-        transform: translateY(-50%);
-        margin-top: 0.5%;
-    }
-    .alumnos ul li[data-estatus="3"] {
-        background-color: #6db6fb;
-    }
+.alumnos .NumControl {
+    position: absolute;
+    right: 210px;
+    transform: translateY(-50%);
+    margin-top: 0.9%;
+}
 
 .Check {
     width: 90%;
@@ -181,6 +168,9 @@ header {
         transition: .5s;
     }
 
+    .Check input:checked[type="checkbox"] {
+        background-color: #1B396A;
+    }
     .Check input:checked[type="checkbox"] {
         background-color: #1B396A;
     }
@@ -263,6 +253,12 @@ header {
         outline: none;
     }
 
+.alumnos ul li[data-estatus="3"] {
+    background-color: #ff8080; /* Color para tareas entregadas tarde */
+}
+.alumnos ul li[data-estatus="1"] {
+    background-color: #aaffaa; /* Color para tareas entregadas a tiempo */
+}
 @media screen and (max-width: 1180px) {
 
 
